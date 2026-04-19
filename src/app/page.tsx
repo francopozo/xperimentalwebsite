@@ -10,7 +10,7 @@ export default function Home() {
               Colectivo de arte
             </p>
             <h1 className="mt-2 text-2xl font-semibold uppercase tracking-[0.18em] sm:text-3xl">
-              Xperimental Website
+              Colectivo Xperimental
             </h1>
           </div>
           <p className="max-w-md text-sm leading-6 text-white/70">

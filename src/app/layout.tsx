@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "XperimentalWebsite",
+  title: "Colectivo Xperimental",
   description: "Plataforma digital para un colectivo de arte experimental.",
 };
 
