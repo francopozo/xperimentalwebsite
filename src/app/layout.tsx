@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Epilogue, Manrope } from "next/font/google";
+import { Epilogue, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 
 const display = Epilogue({
@@ -8,10 +8,10 @@ const display = Epilogue({
   weight: ["400", "500", "600", "700"],
 });
 
-const sans = Manrope({
+const sans = Source_Sans_3({
   variable: "--font-sans-face",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500"],
 });
 
 export const metadata: Metadata = {

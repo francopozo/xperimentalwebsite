@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import {
   editorialNotes,
   featuredArchive,
@@ -6,6 +8,22 @@ import {
   navigation,
   splitEventsByTimeline,
 } from "@/lib/site-content";
+
+const heroImages = {
+  primary: "/images/image1.jpg",
+  detail: "/images/image2.jpg",
+};
+
+const archiveImage = "/images/image3.jpg";
+
+const artistPortraits = [
+  "/images/image4.jpg",
+  "/images/image5.jpg",
+  "/images/image6.jpg",
+  "/images/image7.jpg",
+];
+
+const contactImage = "/images/image8.jpg";
 
 export const revalidate = 3600;
 
@@ -19,16 +37,16 @@ function SectionHeading({
   body: string;
 }) {
   return (
-    <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-      <div className="space-y-3">
-        <p className="text-[0.68rem] uppercase tracking-[0.34em] text-foreground/48">
+    <div className="grid gap-6 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
+      <div className="space-y-2">
+        <p className="text-[0.75rem] uppercase tracking-[0.2em] text-foreground/60">
           {eyebrow}
         </p>
-        <h2 className="font-display text-[clamp(2rem,5vw,4.2rem)] leading-[0.92] tracking-[-0.04em] text-foreground">
+        <h2 className="font-display text-[clamp(2.2rem,4.6vw,4.4rem)] leading-[0.95] tracking-[-0.04em]">
           {title}
         </h2>
       </div>
-      <p className="max-w-2xl text-sm leading-7 text-foreground/68 sm:text-[0.97rem]">
+      <p className="reading-measure text-base leading-8 text-foreground/70">
         {body}
       </p>
     </div>
@@ -40,143 +58,133 @@ export default function Home() {
 
   return (
     <main className="relative overflow-hidden bg-background text-foreground">
-      <div className="pointer-events-none absolute inset-0 editorial-grid opacity-40" />
-
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[32rem] bg-[radial-gradient(circle_at_top,_rgba(196,131,86,0.2),_transparent_48%)]" />
-      <div className="pointer-events-none absolute -left-12 top-28 h-72 w-72 rounded-full bg-accent/18 blur-3xl drift" />
-      <div className="pointer-events-none absolute right-[-5rem] top-[24rem] h-96 w-96 rounded-full bg-accent-cool/12 blur-3xl drift-delay" />
+      {/* Background grid removed: clean editorial background overlay */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(circle_at_top,_rgba(144,96,54,0.22),_transparent_60%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-72 bg-[radial-gradient(circle_at_80%_90%,_rgba(90,141,176,0.16),_transparent_70%)]"
+      />
 
       <section
         id="inicio"
-        className="grain-overlay relative min-h-screen border-b border-line/70 px-6 py-6 sm:px-10 lg:px-14"
+        className="relative min-h-screen border-b border-line/50 px-6 py-10 sm:px-10 lg:px-16"
       >
-        <div className="mx-auto flex min-h-[calc(100vh-3rem)] max-w-[90rem] flex-col">
-          <header className="fade-rise flex flex-col gap-5 border-b border-line/80 pb-5 lg:flex-row lg:items-start lg:justify-between">
-            <div className="space-y-3">
-              <p className="text-[0.65rem] uppercase tracking-[0.4em] text-foreground/48">
-                Colectivo de arte contemporaneo
-              </p>
-              <div className="flex flex-wrap items-center gap-3 text-[0.72rem] uppercase tracking-[0.3em] text-foreground/55">
-                <span>La Paz / Bolivia</span>
-                <span className="h-px w-8 bg-line" />
-                <span>Archivo en construccion</span>
-              </div>
+        <div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-[100rem] flex-col gap-12">
+          <header className="flex flex-col gap-4 border-b border-line/60 pb-6">
+            <div className="flex flex-wrap items-center gap-3 text-[0.72rem] uppercase tracking-[0.24em] text-foreground/70">
+              <span>Colectivo Xperimental</span>
+              <span className="h-px w-8 bg-foreground/30" />
+              <span>La Paz — Bolivia</span>
+              <span className="h-px w-8 bg-foreground/30" />
+              <span>Archivo y agenda cultural</span>
             </div>
-
-            <nav className="flex flex-wrap gap-x-4 gap-y-2 text-[0.72rem] uppercase tracking-[0.26em] text-foreground/58">
+            <nav className="flex flex-wrap gap-x-5 gap-y-2 text-[0.72rem] uppercase tracking-[0.22em] text-foreground/60">
               {navigation.map((item) => (
-                <a
-                  key={item.href}
-                  className="transition-colors duration-300 hover:text-foreground"
-                  href={item.href}
-                >
+                <a key={item.href} className="nav-link" href={item.href}>
                   {item.label}
                 </a>
               ))}
             </nav>
           </header>
 
-          <div className="grid flex-1 gap-12 py-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:py-16">
-            <div className="fade-rise-delay flex flex-col justify-between gap-14">
-              <div className="max-w-4xl space-y-8">
-                <p className="text-[0.72rem] uppercase tracking-[0.36em] text-foreground/48">
-                  Primera version editorial
+          <div className="grid flex-1 gap-10 lg:grid-cols-[0.65fr_1.1fr_0.6fr]">
+            <div className="space-y-6 soft-reveal">
+              <p className="text-[0.72rem] uppercase tracking-[0.28em] text-foreground/70">
+                Edicion abril 2026 / Archivo vivo
+              </p>
+              <p className="reading-measure text-base leading-8 text-foreground/75">
+                Esta entrega deja una home desplegada como publicacion digital:
+                hero editorial, indice de archivo, constelacion de artistas y
+                una agenda que respira el mismo tono curatorial.
+              </p>
+              <div className="space-y-3 text-[0.72rem] uppercase tracking-[0.2em] text-foreground/60">
+                <p className="flex items-center gap-2">
+                  <span className="h-px w-8 bg-foreground/40" /> agenda semanal /
+                  boletin
                 </p>
-                <h1 className="font-display text-[clamp(3.6rem,11vw,9.2rem)] leading-[0.85] tracking-[-0.06em] text-foreground">
-                  Colectivo
-                  <br />
-                  Xperimental
-                </h1>
-                <div className="grid gap-7 lg:grid-cols-[1fr_0.9fr]">
-                  <p className="max-w-xl text-base leading-7 text-foreground/76 sm:text-lg">
-                    Un sitio para obras, artistas, notas de proceso y eventos
-                    que se leen como un archivo vivo. Esta primera version
-                    prioriza atmosfera, estructura y una voz curatorial clara.
-                  </p>
-                  <div className="space-y-4 text-sm leading-7 text-foreground/62">
-                    <p>
-                      Lorem ipsum utilizable: copy provisional, imagenes
-                      placeholder y fichas semilla para validar la experiencia
-                      antes de conectar la capa editorial real.
-                    </p>
-                    <div className="flex flex-wrap gap-3 text-[0.72rem] uppercase tracking-[0.26em] text-foreground/55">
-                      <a
-                        className="border border-line px-4 py-2 transition-colors duration-300 hover:border-foreground/40 hover:bg-foreground hover:text-background"
-                        href="#archivo"
-                      >
-                        Explorar archivo
-                      </a>
-                      <a
-                        className="border border-transparent px-4 py-2 text-foreground/72 transition-colors duration-300 hover:text-foreground"
-                        href="#eventos"
-                      >
-                        Ver agenda
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="overflow-hidden border-y border-line/70 py-3">
-                <div className="ticker flex min-w-max gap-12 pr-12 text-[0.66rem] uppercase tracking-[0.34em] text-foreground/42">
-                  {Array.from({ length: 2 }).map((_, copyIndex) => (
-                    <div key={copyIndex} className="flex gap-12">
-                      <span>archivo vivo</span>
-                      <span>obras y procesos</span>
-                      <span>eventos futuros y pasados</span>
-                      <span>texto provisional</span>
-                      <span>imagenes placeholder</span>
-                      <span>diseno editorial experimental</span>
-                    </div>
-                  ))}
-                </div>
+                <a
+                  className="nav-link inline-flex items-center gap-2 text-foreground"
+                  href="#contacto"
+                >
+                  Escribir a hola@colectivoxperimental.art
+                  <span aria-hidden="true">↗</span>
+                </a>
               </div>
             </div>
 
-            <div className="fade-rise-delay grid gap-4 lg:pb-4">
-              <article className="relative overflow-hidden border border-line/80 bg-background-soft/85 p-5">
-                <div className="absolute inset-0 bg-[linear-gradient(140deg,_rgba(196,131,86,0.16),_transparent_42%,_rgba(123,141,132,0.14)_100%)]" />
-                <div className="relative space-y-20">
-                  <div className="flex items-start justify-between gap-4 text-[0.68rem] uppercase tracking-[0.28em] text-foreground/48">
-                    <span>Placeholder visual</span>
-                    <span>01</span>
+            <div className="space-y-6 soft-reveal-delay">
+              <h1 className="font-display text-[clamp(3.4rem,10vw,8.2rem)] leading-[0.88] tracking-[-0.06em]">
+                Archivo vivo,
+                <span className="block">constelaciones activas.</span>
+              </h1>
+              <p className="reading-measure text-lg leading-8 text-foreground/72">
+                Un sitio para obras, artistas, notas de proceso y eventos que se
+                leen como un archivo en movimiento. La estructura prioriza
+                atmosfera, ritmo editorial y una voz serena antes de conectar la
+                base de datos definitiva.
+              </p>
+              <div className="flex flex-wrap gap-x-6 gap-y-3 text-[0.78rem] uppercase tracking-[0.24em] text-foreground/70">
+                <a className="nav-link" href="#archivo">
+                  Indice curatorial
+                </a>
+                <a className="nav-link" href="#eventos">
+                  Agenda viva
+                </a>
+                <a className="nav-link" href="#artistas">
+                  Constelacion de artistas
+                </a>
+              </div>
+            </div>
+
+            <div className="space-y-4 soft-reveal-delay">
+              <article className="paper-fiber relative overflow-hidden border border-line/60 bg-background-soft px-5 py-6">
+                <div className="relative space-y-6">
+                  <div className="flex items-center justify-between text-[0.68rem] uppercase tracking-[0.26em] text-foreground/60">
+                    <span>Pieza destacada</span>
+                    <span>01 / 05</span>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="relative h-52 overflow-hidden rounded-sm">
+                      <Image
+                        src={heroImages.primary}
+                        alt="Registro visual del colectivo"
+                        fill
+                        sizes="(min-width: 1024px) 320px, 90vw"
+                        className="object-cover"
+                        priority
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[rgba(0,0,0,0.35)] via-transparent to-transparent" />
+                    </div>
+                    <div className="relative h-24 overflow-hidden rounded-sm">
+                      <Image
+                        src={heroImages.detail}
+                        alt="Detalle de materia y textura"
+                        fill
+                        sizes="(min-width: 1024px) 240px, 80vw"
+                        className="object-cover"
+                      />
+                    </div>
                   </div>
                   <div className="space-y-2">
-                    <p className="font-display text-3xl leading-none tracking-[-0.04em] text-foreground">
-                      Imagen,
-                      <br />
-                      materia,
-                      <br />
-                      silencio
+                    <p className="font-display text-3xl leading-[1.05] tracking-[-0.04em]">
+                      Imagen, materia, silencio
                     </p>
-                    <p className="max-w-xs text-sm leading-6 text-foreground/62">
-                      Marco visual provisional para futuras fotografias de sala,
-                      procesos y registros de obra.
+                    <p className="text-sm leading-6 text-foreground/70">
+                      Marco curatorial para futuras fotografias de sala con tono
+                      intimista y materialidad tactil.
                     </p>
                   </div>
                 </div>
               </article>
-
-              <div className="grid gap-4 md:grid-cols-2">
-                <article className="border border-line/80 p-5">
-                  <p className="text-[0.68rem] uppercase tracking-[0.28em] text-foreground/45">
-                    Enfoque
-                  </p>
-                  <p className="mt-5 text-lg leading-7 text-foreground/78">
-                    Archivo cultural, artistas, piezas y eventos en una
-                    composicion sobria y deliberada.
-                  </p>
-                </article>
-                <article className="border border-accent/45 bg-accent/10 p-5">
-                  <p className="text-[0.68rem] uppercase tracking-[0.28em] text-accent">
-                    Despliegue
-                  </p>
-                  <p className="mt-5 text-lg leading-7 text-foreground/82">
-                    Base lista para pruebas, ajustes de contenido y preview en
-                    Vercel.
-                  </p>
-                </article>
-              </div>
+              <article className="border border-line/60 bg-[rgba(255,255,255,0.72)] px-5 py-4 text-[0.78rem] uppercase tracking-[0.22em] text-foreground/70">
+                <div className="flex items-center justify-between">
+                  <span>Metodologia en curso</span>
+                  <span>Archivo vivo</span>
+                </div>
+              </article>
             </div>
           </div>
         </div>
@@ -184,86 +192,121 @@ export default function Home() {
 
       <section
         id="colectivo"
-        className="section-divider relative px-6 py-16 sm:px-10 lg:px-14 lg:py-24"
+        className="section-divider relative px-6 py-16 sm:px-10 lg:px-16 lg:py-24"
       >
-        <div className="mx-auto max-w-[90rem] space-y-12">
+        <div className="mx-auto max-w-[100rem] space-y-12">
           <SectionHeading
             eyebrow="Colectivo"
             title="Una plataforma para exhibir, guardar y activar procesos."
-            body="La primera version organiza el sitio como si fuera una publicacion expandida: un manifesto breve, notas de metodo y piezas que pueden crecer luego hacia rutas, CMS y capas de archivo mas precisas."
+            body="El sitio funciona como revista expandida: manifiesto, notas de metodo y piezas listas para derivar hacia rutas, CMS y capas de archivo especificas."
           />
 
-          <div className="grid gap-6 lg:grid-cols-3">
-            {editorialNotes.map((note) => (
-              <article
-                key={note.title}
-                className="flex min-h-64 flex-col justify-between border border-line/80 bg-background-soft/60 p-6"
-              >
-                <div className="space-y-6">
-                  <p className="text-[0.68rem] uppercase tracking-[0.28em] text-foreground/45">
-                    {note.eyebrow}
+          <div className="grid gap-10 lg:grid-cols-[1.05fr_0.55fr]">
+            <div className="space-y-8">
+              <p className="reading-measure text-base leading-8 text-foreground/72">
+                El lenguaje visual prioriza calma y decision: tipografia con
+                presencia editorial, fondos en tono lino, lineas finas y
+                transiciones suaves. Cada bloque puede crecer sin romper la
+                atmosfera.
+              </p>
+              <div className="grid gap-6 md:grid-cols-2">
+                <article className="border border-line/50 bg-background-soft/80 p-5">
+                  <p className="text-[0.68rem] uppercase tracking-[0.25em] text-foreground/55">
+                    Enfoque
                   </p>
-                  <h3 className="font-display text-[1.7rem] leading-[1.02] tracking-[-0.04em] text-foreground">
+                  <p className="mt-4 text-lg leading-7 text-foreground/80">
+                    Archivo cultural pensado como constelacion: obras, artistas,
+                    eventos y notas habitan la misma reticula.
+                  </p>
+                </article>
+                <article className="border border-line/50 bg-[rgba(144,96,54,0.12)] p-5">
+                  <p className="text-[0.68rem] uppercase tracking-[0.25em] text-foreground/60">
+                    Estado
+                  </p>
+                  <p className="mt-4 text-lg leading-7 text-foreground/80">
+                    Primera version en produccion: copy provisional, imagenes
+                    placeholder y logica lista para recibir contenido real.
+                  </p>
+                </article>
+              </div>
+            </div>
+
+            <aside className="space-y-8 border-l border-line/50 pl-6">
+              {editorialNotes.map((note, index) => (
+                <article
+                  key={note.title}
+                  className={`space-y-3 pb-6 ${
+                    index !== editorialNotes.length - 1 ? "ink-divider" : ""
+                  }`}
+                >
+                  <p className="text-[0.68rem] uppercase tracking-[0.22em] text-foreground/55">
+                    {String(index + 1).padStart(2, "0")} — {note.eyebrow}
+                  </p>
+                  <h3 className="font-display text-[1.6rem] leading-[1.05] tracking-[-0.03em]">
                     {note.title}
                   </h3>
-                </div>
-                <p className="max-w-sm text-sm leading-7 text-foreground/64">
-                  {note.body}
-                </p>
-              </article>
-            ))}
+                  <p className="text-sm leading-7 text-foreground/70">{note.body}</p>
+                </article>
+              ))}
+              <div className="space-y-2 text-[0.72rem] uppercase tracking-[0.2em] text-foreground/65">
+                <p>Metodo 2026 · investigacion situada · montaje digital</p>
+                <p>Proxima capa: vincular CMS y sumar rutas especificas</p>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
 
       <section
         id="archivo"
-        className="section-divider relative px-6 py-16 sm:px-10 lg:px-14 lg:py-24"
+        className="section-divider relative px-6 py-16 sm:px-10 lg:px-16 lg:py-24"
       >
-        <div className="mx-auto max-w-[90rem] space-y-12">
+        <div className="mx-auto max-w-[100rem] space-y-12">
           <SectionHeading
             eyebrow="Archivo"
             title="Obras y rastros que se ordenan sin perder misterio."
-            body="Las fichas se plantean como piezas curatoriales. El contenido sigue siendo provisional, pero la reticula, los indices y los cambios de escala ya empujan la experiencia hacia un archivo digital con personalidad."
+            body="Las fichas funcionan como piezas curatoriales: indice numerado, metadata precisa y descripciones breves que conservan el tono del colectivo."
           />
 
-          <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-            <div className="border border-line/80 bg-background-soft/50 p-6">
-              <div className="flex items-center justify-between border-b border-line/70 pb-4">
-                <p className="text-[0.68rem] uppercase tracking-[0.32em] text-foreground/45">
-                  Indice provisional
-                </p>
-                <p className="text-[0.68rem] uppercase tracking-[0.28em] text-foreground/34">
-                  03 piezas destacadas
-                </p>
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+            <div className="border border-line/60 bg-background-soft/70 p-6">
+              <div className="flex items-center justify-between text-[0.7rem] uppercase tracking-[0.26em] text-foreground/60">
+                <span>Indice provisional</span>
+                <span>{featuredArchive.length.toString().padStart(2, "0")} piezas</span>
               </div>
-
-              <div className="mt-6 grid gap-6">
+              <div className="mt-6 space-y-6">
                 {featuredArchive.map((entry, index) => (
                   <article
                     key={entry.title}
-                    className="grid gap-4 border-b border-line/60 pb-6 last:border-none last:pb-0"
+                    className={`space-y-4 ${
+                      index !== featuredArchive.length - 1 ? "pb-6 ink-divider" : ""
+                    }`}
                   >
-                    <div className="flex items-start justify-between gap-4">
+                    <div className="flex flex-wrap items-baseline justify-between gap-4">
                       <div>
-                        <p className="text-[0.68rem] uppercase tracking-[0.26em] text-foreground/38">
+                        <p className="text-[0.68rem] uppercase tracking-[0.22em] text-foreground/55">
                           {String(index + 1).padStart(2, "0")}
                         </p>
-                        <h3 className="mt-3 font-display text-[1.9rem] leading-none tracking-[-0.04em]">
+                        <h3 className="mt-2 font-display text-[2rem] leading-[1.02] tracking-[-0.04em]">
                           {entry.title}
                         </h3>
                       </div>
-                      <p className="text-[0.68rem] uppercase tracking-[0.24em] text-foreground/45">
+                      <p className="text-[0.68rem] uppercase tracking-[0.2em] text-foreground/55">
                         {entry.year}
                       </p>
                     </div>
-
-                    <div className="grid gap-3 text-sm text-foreground/62 sm:grid-cols-2">
-                      <p>{entry.summary}</p>
-                      <div className="space-y-2">
-                        <p className="uppercase tracking-[0.22em] text-foreground/42">
-                          {entry.format}
+                    <div className="grid gap-4 text-sm text-foreground/72 sm:grid-cols-2">
+                      <div>
+                        <p className="text-[0.65rem] uppercase tracking-[0.22em] text-foreground/50">
+                          Descripcion
                         </p>
+                        <p className="mt-1 leading-7">{entry.summary}</p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-[0.65rem] uppercase tracking-[0.22em] text-foreground/50">
+                          Formato
+                        </p>
+                        <p>{entry.format}</p>
                         <p>{entry.dimensions}</p>
                         <p>{entry.note}</p>
                       </div>
@@ -274,30 +317,35 @@ export default function Home() {
             </div>
 
             <div className="grid gap-6">
-              <article className="relative min-h-[24rem] overflow-hidden border border-line/80 bg-background-soft px-6 py-6">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,_rgba(196,131,86,0.18),_transparent_22%),linear-gradient(150deg,_rgba(255,255,255,0.02),_transparent_50%,_rgba(123,141,132,0.14)_100%)]" />
+              <article className="paper-fiber relative min-h-[24rem] overflow-hidden border border-line/60 bg-background-soft px-6 py-6">
+                <div className="absolute inset-0">
+                  <Image
+                    src={archiveImage}
+                    alt="Collage curatorial del archivo"
+                    fill
+                    sizes="(min-width: 1024px) 520px, 100vw"
+                    className="object-cover opacity-80"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-[rgba(237,236,226,0.92)] via-[rgba(237,236,226,0.4)] to-[rgba(144,96,54,0.3)]" />
+                </div>
                 <div className="relative flex h-full flex-col justify-between">
-                  <div className="flex items-center justify-between text-[0.68rem] uppercase tracking-[0.28em] text-foreground/45">
-                    <span>Montaje placeholder</span>
-                    <span>Futura galeria</span>
+                  <div className="flex items-center justify-between text-[0.68rem] uppercase tracking-[0.24em] text-foreground/55">
+                    <span>Montaje virtual</span>
+                    <span>Galeria futura</span>
                   </div>
-
                   <div className="grid gap-5 md:grid-cols-[1fr_0.65fr]">
                     <div className="space-y-5">
-                      <p className="font-display text-[clamp(2.3rem,5vw,4rem)] leading-[0.9] tracking-[-0.05em] text-foreground">
-                        Un archivo que deja ver
-                        <br />
-                        la textura del proceso.
+                      <p className="font-display text-[clamp(2.4rem,5vw,4.2rem)] leading-[0.92] tracking-[-0.05em]">
+                        Un archivo que deja ver la textura del proceso.
                       </p>
-                      <p className="max-w-lg text-sm leading-7 text-foreground/66">
-                        Espacio reservado para una imagen protagonista o una
-                        pieza audiovisual de apertura. Hoy actua como campo de
-                        prueba para el equilibrio entre tipografia, vacio y
-                        atmosfera.
+                      <p className="reading-measure text-sm leading-7 text-foreground/72">
+                        Espacio reservado para imagenes curatoriales o piezas
+                        audiovisuales. Hoy funciona como campo de prueba para
+                        equilibrio entre tipografia, vacio y atmosfera.
                       </p>
                     </div>
                     <div className="flex items-end justify-start">
-                      <div className="border-l border-line/80 pl-5 text-[0.72rem] uppercase tracking-[0.26em] text-foreground/44">
+                      <div className="border-l border-line/60 pl-5 text-[0.72rem] uppercase tracking-[0.22em] text-foreground/55">
                         <p>cover art / still / sala / documento</p>
                       </div>
                     </div>
@@ -305,15 +353,17 @@ export default function Home() {
                 </div>
               </article>
 
-              <article className="grid gap-4 border border-line/80 p-6 md:grid-cols-[0.9fr_1.1fr]">
-                <p className="font-display text-[1.8rem] leading-none tracking-[-0.04em] text-foreground">
+              <article className="border border-line/60 bg-background-soft/80 p-6">
+                <p className="font-display text-[1.9rem] leading-[1.05] tracking-[-0.04em]">
                   Notas de archivo
                 </p>
-                <p className="text-sm leading-7 text-foreground/64">
-                  Lorem ipsum sobrio para futuras notas de contexto, creditos,
-                  metodologia de catalogacion o relaciones entre obras,
-                  artistas y eventos. La estructura ya esta lista para crecer
-                  sin perder la sensacion editorial.
+                <p className="mt-4 text-sm leading-7 text-foreground/72">
+                  Texto provisional para sumar contexto, creditos y metadatos
+                  cuando conectemos la base real. La composicion ya sostiene
+                  citas, timelines o enlaces a documentos descargables.
+                </p>
+                <p className="mt-5 text-[0.72rem] uppercase tracking-[0.22em] text-foreground/60">
+                  Proxima capa: documentos PDF, audio guias y rutas internas.
                 </p>
               </article>
             </div>
@@ -323,44 +373,46 @@ export default function Home() {
 
       <section
         id="artistas"
-        className="section-divider relative px-6 py-16 sm:px-10 lg:px-14 lg:py-24"
+        className="section-divider relative px-6 py-16 sm:px-10 lg:px-16 lg:py-24"
       >
-        <div className="mx-auto max-w-[90rem] space-y-12">
+        <div className="mx-auto max-w-[100rem] space-y-12">
           <SectionHeading
             eyebrow="Artistas"
             title="Perfiles pensados como entradas de una constelacion."
-            body="En esta version los perfiles son sintesis de tono: nombre, campo de trabajo, temporalidad y una breve nota editorial. Luego pueden crecer hacia paginas individuales o integracion con CMS."
+            body="Cada registro funciona como ficha editorial breve. Luego podran crecer hacia paginas individuales o integracion con el CMS."
           />
 
-          <div className="grid gap-6 lg:grid-cols-3">
-            {featuredArtists.map((artist) => (
+          <div className="border border-line/60 divide-y divide-line/50">
+            {featuredArtists.map((artist, index) => (
               <article
                 key={artist.name}
-                className="flex flex-col gap-8 border border-line/80 p-6"
+                className="grid gap-6 px-6 py-8 lg:grid-cols-[0.4fr_0.35fr_0.85fr]"
               >
-                <div className="space-y-4">
-                  <p className="text-[0.68rem] uppercase tracking-[0.28em] text-foreground/44">
-                    {artist.role}
+                <div className="space-y-3">
+                  <p className="text-[0.68rem] uppercase tracking-[0.22em] text-foreground/55">
+                    {String(index + 1).padStart(2, "0")} · {artist.role}
                   </p>
                   <div>
-                    <h3 className="font-display text-[2rem] leading-none tracking-[-0.04em] text-foreground">
+                    <h3 className="font-display text-[2rem] leading-[1] tracking-[-0.04em]">
                       {artist.name}
                     </h3>
-                    <p className="mt-2 text-[0.72rem] uppercase tracking-[0.24em] text-foreground/44">
+                    <p className="mt-2 text-[0.72rem] uppercase tracking-[0.2em] text-foreground/55">
                       {artist.years}
                     </p>
                   </div>
                 </div>
-
-                <div className="flex min-h-44 items-end border border-line/80 bg-[linear-gradient(145deg,_rgba(255,255,255,0.02),_rgba(196,131,86,0.14))] p-4">
-                  <p className="text-[0.68rem] uppercase tracking-[0.28em] text-foreground/45">
-                    Placeholder de retrato / material de proceso
-                  </p>
+                <div className="relative aspect-[3/4] overflow-hidden border border-line/60 bg-background-soft/60">
+                  <Image
+                    src={artistPortraits[index % artistPortraits.length]}
+                    alt={`Material de proceso de ${artist.name}`}
+                    fill
+                    sizes="(min-width: 1024px) 220px, 60vw"
+                    className="object-cover"
+                  />
                 </div>
-
-                <div className="space-y-4 text-sm leading-7 text-foreground/64">
+                <div className="space-y-3 text-sm leading-7 text-foreground/72">
                   <p>{artist.bio}</p>
-                  <p className="uppercase tracking-[0.22em] text-foreground/42">
+                  <p className="uppercase tracking-[0.22em] text-foreground/55">
                     {artist.focus}
                   </p>
                 </div>
@@ -372,50 +424,40 @@ export default function Home() {
 
       <section
         id="eventos"
-        className="section-divider relative px-6 py-16 sm:px-10 lg:px-14 lg:py-24"
+        className="section-divider relative px-6 py-16 sm:px-10 lg:px-16 lg:py-24"
       >
-        <div className="mx-auto max-w-[90rem] space-y-12">
+        <div className="mx-auto max-w-[100rem] space-y-12">
           <SectionHeading
             eyebrow="Eventos"
             title="Agenda futura y memoria de programas anteriores."
-            body="La pagina ya separa automaticamente eventos vigentes o futuros de los ya concluidos. En esta fase la data sigue siendo semilla, pero la logica editorial queda instalada para la siguiente iteracion."
+            body="La pagina separa automaticamente los eventos vigentes de los ya concluidos. El tono sigue siendo editorial: fechas como cintillos, sedes descritas con calma y estados breves."
           />
 
-          <div className="grid gap-6 xl:grid-cols-2">
-            <div className="border border-line/80 bg-background-soft/55 p-6">
-              <div className="flex items-center justify-between border-b border-line/70 pb-4">
-                <h3 className="font-display text-[1.8rem] leading-none tracking-[-0.04em] text-foreground">
-                  Proximos
-                </h3>
-                <p className="text-[0.68rem] uppercase tracking-[0.26em] text-foreground/42">
-                  {upcoming.length} activos
-                </p>
+          <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+            <div className="border border-line/60 bg-background-soft/70 p-6">
+              <div className="flex items-center justify-between text-[0.7rem] uppercase tracking-[0.22em] text-foreground/60">
+                <span>Proximos</span>
+                <span>{upcoming.length} activos</span>
               </div>
-
-              <div className="mt-6 grid gap-6">
+              <div className="mt-6 space-y-6">
                 {upcoming.map((event) => (
                   <article
                     key={event.title}
-                    className="grid gap-4 border-b border-line/60 pb-6 last:border-none last:pb-0"
+                    className="space-y-4 rounded-sm border border-line/40 bg-[rgba(255,255,255,0.65)] p-5"
                   >
-                    <div className="space-y-3">
-                      <div className="flex flex-wrap items-center gap-3 text-[0.68rem] uppercase tracking-[0.24em] text-foreground/44">
-                        <span>{formatEventRange(event.startDate, event.endDate)}</span>
-                        <span className="h-px w-6 bg-line" />
-                        <span>{event.format}</span>
-                      </div>
-                      <h4 className="font-display text-[1.6rem] leading-none tracking-[-0.04em] text-foreground">
-                        {event.title}
-                      </h4>
+                    <div className="flex flex-wrap items-center gap-3 text-[0.65rem] uppercase tracking-[0.22em] text-foreground/60">
+                      <span className="rounded-full border border-line/50 px-3 py-1">
+                        {formatEventRange(event.startDate, event.endDate)}
+                      </span>
+                      <span>{event.format}</span>
                     </div>
-
-                    <p className="max-w-xl text-sm leading-7 text-foreground/64">
-                      {event.excerpt}
-                    </p>
-
-                    <div className="flex flex-wrap gap-x-5 gap-y-2 text-[0.72rem] uppercase tracking-[0.22em] text-foreground/44">
+                    <h4 className="font-display text-[1.65rem] leading-[1.02] tracking-[-0.04em]">
+                      {event.title}
+                    </h4>
+                    <p className="text-sm leading-7 text-foreground/72">{event.excerpt}</p>
+                    <div className="flex flex-wrap gap-4 text-[0.72rem] uppercase tracking-[0.2em] text-foreground/60">
                       <span>
-                        {event.venue} / {event.city}, {event.country}
+                        {event.venue} · {event.city}, {event.country}
                       </span>
                       <span>{event.statusHint}</span>
                     </div>
@@ -424,40 +466,29 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="border border-line/80 p-6">
-              <div className="flex items-center justify-between border-b border-line/70 pb-4">
-                <h3 className="font-display text-[1.8rem] leading-none tracking-[-0.04em] text-foreground">
-                  Pasados
-                </h3>
-                <p className="text-[0.68rem] uppercase tracking-[0.26em] text-foreground/42">
-                  {archive.length} archivados
-                </p>
+            <div className="border border-line/60 p-6">
+              <div className="flex items-center justify-between text-[0.7rem] uppercase tracking-[0.22em] text-foreground/60">
+                <span>Pasados</span>
+                <span>{archive.length} archivados</span>
               </div>
-
-              <div className="mt-6 grid gap-6">
+              <div className="mt-6 space-y-6">
                 {archive.map((event) => (
                   <article
                     key={event.title}
-                    className="grid gap-4 border-b border-line/60 pb-6 last:border-none last:pb-0"
+                    className="space-y-4 border-l border-line/60 pl-5"
                   >
-                    <div className="space-y-3">
-                      <div className="flex flex-wrap items-center gap-3 text-[0.68rem] uppercase tracking-[0.24em] text-foreground/40">
-                        <span>{formatEventRange(event.startDate, event.endDate)}</span>
-                        <span className="h-px w-6 bg-line" />
-                        <span>{event.format}</span>
-                      </div>
-                      <h4 className="font-display text-[1.55rem] leading-none tracking-[-0.04em] text-foreground">
-                        {event.title}
-                      </h4>
+                    <div className="flex flex-wrap items-center gap-3 text-[0.65rem] uppercase tracking-[0.2em] text-foreground/50">
+                      <span>{formatEventRange(event.startDate, event.endDate)}</span>
+                      <span className="h-px w-6 bg-line" />
+                      <span>{event.format}</span>
                     </div>
-
-                    <p className="max-w-xl text-sm leading-7 text-foreground/62">
-                      {event.excerpt}
-                    </p>
-
-                    <div className="flex flex-wrap gap-x-5 gap-y-2 text-[0.72rem] uppercase tracking-[0.22em] text-foreground/42">
+                    <h4 className="font-display text-[1.5rem] leading-[1.02] tracking-[-0.04em]">
+                      {event.title}
+                    </h4>
+                    <p className="text-sm leading-7 text-foreground/68">{event.excerpt}</p>
+                    <div className="flex flex-wrap gap-4 text-[0.7rem] uppercase tracking-[0.2em] text-foreground/55">
                       <span>
-                        {event.venue} / {event.city}, {event.country}
+                        {event.venue} · {event.city}, {event.country}
                       </span>
                       <span>{event.statusHint}</span>
                     </div>
@@ -471,51 +502,62 @@ export default function Home() {
 
       <section
         id="contacto"
-        className="section-divider relative px-6 py-16 sm:px-10 lg:px-14 lg:py-24"
+        className="section-divider relative px-6 py-16 sm:px-10 lg:px-16 lg:py-24"
       >
-        <div className="mx-auto grid max-w-[90rem] gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="mx-auto grid max-w-[100rem] gap-12 lg:grid-cols-[1.15fr_0.85fr]">
           <div className="space-y-6">
-            <p className="text-[0.68rem] uppercase tracking-[0.34em] text-foreground/46">
+            <p className="text-[0.72rem] uppercase tracking-[0.28em] text-foreground/60">
               Contacto y siguiente paso
             </p>
-            <h2 className="font-display text-[clamp(2.6rem,6vw,5.4rem)] leading-[0.9] tracking-[-0.05em] text-foreground">
-              La estructura ya esta lista
-              <br />
-              para poblarse de contenido real.
+            <h2 className="font-display text-[clamp(2.6rem,6vw,5.4rem)] leading-[0.9] tracking-[-0.05em]">
+              La estructura esta lista
+              <span className="block">para poblarse de contenido real.</span>
             </h2>
-            <p className="max-w-2xl text-base leading-8 text-foreground/68">
-              Esta primera entrega deja una home desplegable y suficientemente
-              articulada para mostrar direccion, tono y potencial de crecimiento.
-              El siguiente movimiento natural es conectar material real,
-              imagenes curatoriales y rutas dedicadas para cada dominio.
+            <p className="reading-measure text-base leading-8 text-foreground/72">
+              Esta version deja sentada la direccion visual calida y editorial.
+              Lo que sigue: integrar material fotografico, fichas completas y
+              rutas dedicadas para cada dominio del colectivo.
             </p>
           </div>
 
-          <div className="grid gap-4 self-end">
-            <article className="border border-line/80 p-6">
-              <p className="text-[0.68rem] uppercase tracking-[0.28em] text-foreground/44">
+          <div className="grid gap-4">
+            <article className="border border-line/60 bg-background-soft/80 p-6">
+              <p className="text-[0.7rem] uppercase tracking-[0.24em] text-foreground/60">
                 Correo provisional
               </p>
-              <p className="mt-4 text-lg text-foreground/84">
+              <p className="mt-4 text-xl text-foreground/85">
                 hola@colectivoxperimental.art
               </p>
             </article>
-            <article className="border border-line/80 bg-background-soft/50 p-6">
-              <p className="text-[0.68rem] uppercase tracking-[0.28em] text-foreground/44">
-                Proxima capa
-              </p>
-              <p className="mt-4 text-lg leading-7 text-foreground/78">
-                Integrar contenido real, secciones internas y una galeria visual
-                con registros seleccionados.
-              </p>
+            <article className="paper-fiber relative overflow-hidden border border-line/60 bg-background-soft p-6">
+              <div className="absolute inset-0">
+                <Image
+                  src={contactImage}
+                  alt="Detalle de mesa de trabajo del colectivo"
+                  fill
+                  sizes="(min-width: 1024px) 480px, 100vw"
+                  className="object-cover opacity-75"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-[rgba(237,236,226,0.85)] to-[rgba(255,255,255,0.25)]" />
+              </div>
+              <div className="relative">
+                <p className="text-[0.7rem] uppercase tracking-[0.24em] text-foreground/60">
+                  Proxima capa
+                </p>
+                <p className="mt-4 text-lg leading-7 text-foreground/80">
+                  Integrar contenido real, secciones internas y una galeria visual
+                  con registros seleccionados. La linea editorial ya sostiene el
+                  crecimiento.
+                </p>
+              </div>
             </article>
           </div>
         </div>
 
-        <footer className="mx-auto mt-16 max-w-[90rem] border-t border-line/80 pt-5 text-[0.68rem] uppercase tracking-[0.3em] text-foreground/38">
+        <footer className="mx-auto mt-16 max-w-[100rem] border-t border-line/60 pt-5 text-[0.68rem] uppercase tracking-[0.24em] text-foreground/55">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <p>Colectivo Xperimental / archivo / artistas / eventos</p>
-            <p>Primera version para preview en Vercel</p>
+            <p>Version editorial serena · lista para iterar</p>
           </div>
         </footer>
       </section>
