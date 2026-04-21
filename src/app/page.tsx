@@ -70,10 +70,10 @@ export default function Home() {
 
       <section
         id="inicio"
-        className="relative min-h-screen border-b border-line/50 px-6 py-10 sm:px-10 lg:px-16"
+        className="relative min-h-screen px-6 py-10 sm:px-10 lg:px-16"
       >
         <div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-[100rem] flex-col gap-12">
-          <header className="flex flex-col gap-4 border-b border-line/60 pb-6">
+          <header className="flex flex-col gap-4 pb-6">
             <div className="flex flex-wrap items-center gap-3 text-[0.72rem] uppercase tracking-[0.24em] text-foreground/70">
               <span>Colectivo Xperimental</span>
               <span className="h-px w-8 bg-foreground/30" />
@@ -140,34 +140,34 @@ export default function Home() {
             </div>
 
             <div className="space-y-4 soft-reveal-delay">
-              <article className="paper-fiber relative overflow-hidden border border-line/60 bg-background-soft px-5 py-6">
+              <article className="paper-fiber relative overflow-hidden bg-background-soft px-5 py-6">
                 <div className="relative space-y-6">
                   <div className="flex items-center justify-between text-[0.68rem] uppercase tracking-[0.26em] text-foreground/60">
                     <span>Pieza destacada</span>
                     <span>01 / 05</span>
                   </div>
-                  <div className="space-y-3">
-                    <div className="relative h-52 overflow-hidden rounded-sm">
-                      <Image
-                        src={heroImages.primary}
-                        alt="Registro visual del colectivo"
-                        fill
-                        sizes="(min-width: 1024px) 320px, 90vw"
-                        className="object-cover"
-                        priority
-                      />
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[rgba(0,0,0,0.35)] via-transparent to-transparent" />
+<div className="space-y-3">
+                      <div className="relative h-[28rem] overflow-hidden">
+                        <Image
+                          src={heroImages.primary}
+                          alt="Registro visual del colectivo"
+                          fill
+                          sizes="(min-width: 1024px) 320px, 90vw"
+                          className="object-cover"
+                          priority
+                        />
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[rgba(0,0,0,0.35)] via-transparent to-transparent" />
+                      </div>
+                      <div className="relative h-40 overflow-hidden">
+                        <Image
+                          src={heroImages.detail}
+                          alt="Detalle de materia y textura"
+                          fill
+                          sizes="(min-width: 1024px) 240px, 80vw"
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
-                    <div className="relative h-24 overflow-hidden rounded-sm">
-                      <Image
-                        src={heroImages.detail}
-                        alt="Detalle de materia y textura"
-                        fill
-                        sizes="(min-width: 1024px) 240px, 80vw"
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
                   <div className="space-y-2">
                     <p className="font-display text-3xl leading-[1.05] tracking-[-0.04em]">
                       Imagen, materia, silencio
@@ -179,7 +179,7 @@ export default function Home() {
                   </div>
                 </div>
               </article>
-              <article className="border border-line/60 bg-[rgba(255,255,255,0.72)] px-5 py-4 text-[0.78rem] uppercase tracking-[0.22em] text-foreground/70">
+              <article className="bg-[rgba(255,255,255,0.72)] px-5 py-4 text-[0.78rem] uppercase tracking-[0.22em] text-foreground/70">
                 <div className="flex items-center justify-between">
                   <span>Metodologia en curso</span>
                   <span>Archivo vivo</span>
@@ -210,7 +210,7 @@ export default function Home() {
                 atmosfera.
               </p>
               <div className="grid gap-6 md:grid-cols-2">
-                <article className="border border-line/50 bg-background-soft/80 p-5">
+                <article className="bg-background-soft/80 p-5">
                   <p className="text-[0.68rem] uppercase tracking-[0.25em] text-foreground/55">
                     Enfoque
                   </p>
@@ -219,7 +219,7 @@ export default function Home() {
                     eventos y notas habitan la misma reticula.
                   </p>
                 </article>
-                <article className="border border-line/50 bg-[rgba(144,96,54,0.12)] p-5">
+                <article className="bg-[rgba(144,96,54,0.12)] p-5">
                   <p className="text-[0.68rem] uppercase tracking-[0.25em] text-foreground/60">
                     Estado
                   </p>
@@ -231,12 +231,12 @@ export default function Home() {
               </div>
             </div>
 
-            <aside className="space-y-8 border-l border-line/50 pl-6">
+            <aside className="space-y-8 pl-6">
               {editorialNotes.map((note, index) => (
                 <article
                   key={note.title}
                   className={`space-y-3 pb-6 ${
-                    index !== editorialNotes.length - 1 ? "ink-divider" : ""
+                    index !== editorialNotes.length - 1 ? "pb-6" : ""
                   }`}
                 >
                   <p className="text-[0.68rem] uppercase tracking-[0.22em] text-foreground/55">
@@ -269,7 +269,7 @@ export default function Home() {
           />
 
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-            <div className="border border-line/60 bg-background-soft/70 p-6">
+            <div className="bg-background-soft/70 p-6">
               <div className="flex items-center justify-between text-[0.7rem] uppercase tracking-[0.26em] text-foreground/60">
                 <span>Indice provisional</span>
                 <span>{featuredArchive.length.toString().padStart(2, "0")} piezas</span>
@@ -279,7 +279,7 @@ export default function Home() {
                   <article
                     key={entry.title}
                     className={`space-y-4 ${
-                      index !== featuredArchive.length - 1 ? "pb-6 ink-divider" : ""
+                      index !== featuredArchive.length - 1 ? "pb-6" : ""
                     }`}
                   >
                     <div className="flex flex-wrap items-baseline justify-between gap-4">
@@ -317,7 +317,7 @@ export default function Home() {
             </div>
 
             <div className="grid gap-6">
-              <article className="paper-fiber relative min-h-[24rem] overflow-hidden border border-line/60 bg-background-soft px-6 py-6">
+              <article className="paper-fiber relative min-h-[32rem] overflow-hidden bg-background-soft px-6 py-6">
                 <div className="absolute inset-0">
                   <Image
                     src={archiveImage}
@@ -345,7 +345,7 @@ export default function Home() {
                       </p>
                     </div>
                     <div className="flex items-end justify-start">
-                      <div className="border-l border-line/60 pl-5 text-[0.72rem] uppercase tracking-[0.22em] text-foreground/55">
+                      <div className="pl-5 text-[0.72rem] uppercase tracking-[0.22em] text-foreground/55">
                         <p>cover art / still / sala / documento</p>
                       </div>
                     </div>
@@ -353,7 +353,7 @@ export default function Home() {
                 </div>
               </article>
 
-              <article className="border border-line/60 bg-background-soft/80 p-6">
+<article className="bg-background-soft/80 p-6">
                 <p className="font-display text-[1.9rem] leading-[1.05] tracking-[-0.04em]">
                   Notas de archivo
                 </p>
@@ -382,7 +382,7 @@ export default function Home() {
             body="Cada registro funciona como ficha editorial breve. Luego podran crecer hacia paginas individuales o integracion con el CMS."
           />
 
-          <div className="border border-line/60 divide-y divide-line/50">
+          <div className="space-y-8">
             {featuredArtists.map((artist, index) => (
               <article
                 key={artist.name}
@@ -401,7 +401,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="relative aspect-[3/4] overflow-hidden border border-line/60 bg-background-soft/60">
+                <div className="relative aspect-[3/5] overflow-hidden bg-background-soft/60">
                   <Image
                     src={artistPortraits[index % artistPortraits.length]}
                     alt={`Material de proceso de ${artist.name}`}
@@ -434,7 +434,7 @@ export default function Home() {
           />
 
           <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
-            <div className="border border-line/60 bg-background-soft/70 p-6">
+            <div className="bg-background-soft/70 p-6">
               <div className="flex items-center justify-between text-[0.7rem] uppercase tracking-[0.22em] text-foreground/60">
                 <span>Proximos</span>
                 <span>{upcoming.length} activos</span>
@@ -443,10 +443,10 @@ export default function Home() {
                 {upcoming.map((event) => (
                   <article
                     key={event.title}
-                    className="space-y-4 rounded-sm border border-line/40 bg-[rgba(255,255,255,0.65)] p-5"
+                    className="space-y-4 rounded-sm bg-[rgba(255,255,255,0.65)] p-5"
                   >
                     <div className="flex flex-wrap items-center gap-3 text-[0.65rem] uppercase tracking-[0.22em] text-foreground/60">
-                      <span className="rounded-full border border-line/50 px-3 py-1">
+                      <span className="rounded-full px-3 py-1">
                         {formatEventRange(event.startDate, event.endDate)}
                       </span>
                       <span>{event.format}</span>
@@ -466,7 +466,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="border border-line/60 p-6">
+            <div className="p-6">
               <div className="flex items-center justify-between text-[0.7rem] uppercase tracking-[0.22em] text-foreground/60">
                 <span>Pasados</span>
                 <span>{archive.length} archivados</span>
@@ -475,7 +475,7 @@ export default function Home() {
                 {archive.map((event) => (
                   <article
                     key={event.title}
-                    className="space-y-4 border-l border-line/60 pl-5"
+                    className="space-y-4 pl-5"
                   >
                     <div className="flex flex-wrap items-center gap-3 text-[0.65rem] uppercase tracking-[0.2em] text-foreground/50">
                       <span>{formatEventRange(event.startDate, event.endDate)}</span>
@@ -521,7 +521,7 @@ export default function Home() {
           </div>
 
           <div className="grid gap-4">
-            <article className="border border-line/60 bg-background-soft/80 p-6">
+            <article className="bg-background-soft/80 p-6">
               <p className="text-[0.7rem] uppercase tracking-[0.24em] text-foreground/60">
                 Correo provisional
               </p>
@@ -529,7 +529,7 @@ export default function Home() {
                 hola@colectivoxperimental.art
               </p>
             </article>
-            <article className="paper-fiber relative overflow-hidden border border-line/60 bg-background-soft p-6">
+            <article className="paper-fiber relative overflow-hidden bg-background-soft p-6">
               <div className="absolute inset-0">
                 <Image
                   src={contactImage}
@@ -554,7 +554,7 @@ export default function Home() {
           </div>
         </div>
 
-        <footer className="mx-auto mt-16 max-w-[100rem] border-t border-line/60 pt-5 text-[0.68rem] uppercase tracking-[0.24em] text-foreground/55">
+        <footer className="mx-auto mt-16 max-w-[100rem] pt-5 text-[0.68rem] uppercase tracking-[0.24em] text-foreground/55">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <p>Colectivo Xperimental / archivo / artistas / eventos</p>
             <p>Version editorial serena · lista para iterar</p>
