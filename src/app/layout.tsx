@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Epilogue, Source_Sans_3 } from "next/font/google";
+import { ScrollTriggerRefresh } from "@/components/gsap/scroll-trigger-refresh";
 import "./globals.css";
 
 const display = Epilogue({
@@ -33,7 +34,10 @@ export default function RootLayout({
       lang="es"
       className={`${display.variable} ${sans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ScrollTriggerRefresh />
+        {children}
+      </body>
     </html>
   );
 }

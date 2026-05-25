@@ -41,6 +41,7 @@ body {
     linear-gradient(180deg, #f6f3ea 0%, #edece2 48%, #e6e3d9 100%);
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
+  font-size: 21px;
 }
 
 a {
@@ -135,18 +136,6 @@ p {
   background: linear-gradient(90deg, rgba(29, 25, 23, 0.45), rgba(29, 25, 23, 0.05));
 }
 
-.soft-reveal {
-  animation: soft-reveal 900ms cubic-bezier(0.25, 0.8, 0.25, 1) both;
-}
-
-.soft-reveal-delay {
-  animation: soft-reveal 1100ms cubic-bezier(0.25, 0.8, 0.25, 1) 90ms both;
-}
-
-.slow-pan {
-  animation: slow-pan 18s ease-in-out infinite alternate;
-}
-
 .nav-link {
   position: relative;
   padding-bottom: 0.25rem;
@@ -172,24 +161,4 @@ p {
   max-width: 42ch;
 }
 
-@keyframes soft-reveal {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 14px, 0);
-  }
 
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes slow-pan {
-  from {
-    transform: scale(1) translate3d(0, 0, 0);
-  }
-
-  to {
-    transform: scale(1.05) translate3d(-12px, -8px, 0);
-  }
-}

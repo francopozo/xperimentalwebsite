@@ -12,9 +12,6 @@ export type EditorialNote = {
 export type ArtistProfile = {
   name: string;
   role: string;
-  bio: string;
-  focus: string;
-  years: string;
 };
 
 export type ArtworkEntry = {
@@ -46,8 +43,8 @@ const eventFormatter = new Intl.DateTimeFormat("es-BO", {
 
 export const navigation: NavItem[] = [
   { href: "#inicio", label: "Inicio" },
-  { href: "#colectivo", label: "Colectivo" },
-  { href: "#archivo", label: "Archivo" },
+  { href: "#sobre", label: "Sobre" },
+  { href: "#origen", label: "Origen" },
   { href: "#artistas", label: "Artistas" },
   { href: "#eventos", label: "Eventos" },
   { href: "#contacto", label: "Contacto" },
@@ -55,154 +52,105 @@ export const navigation: NavItem[] = [
 
 export const editorialNotes: EditorialNote[] = [
   {
-    eyebrow: "Linea curatorial",
-    title: "Entre documento, cuerpo y frecuencia",
+    eyebrow: "Origen",
+    title: "Otro modo de ver",
     body:
-      "Texto provisional para enmarcar el sitio como un archivo vivo: ensayo, memoria material y activacion publica en una misma superficie.",
+      "A invitacion de KIOSKO Galeria en Santa Cruz, Bolivia, se realiza el taller de Video Arte impartido por Ivan Caceres. Dirigido a estudiantes y personas que inician su vinculacion con el arte, con el objetivo de informar y formar en el ambito del videoarte desde perspectivas artisticas, expositivas y de proyectos.",
   },
   {
-    eyebrow: "Metodo",
-    title: "Investigacion situada y montaje digital",
+    eyebrow: "Iniciativa",
+    title: "Dia del Video Arte Boliviano",
     body:
-      "Cada bloque puede crecer hacia una capa editorial mayor, pero hoy funciona como una primera constelacion de relatos, indices y rastros de procesos.",
-  },
-  {
-    eyebrow: "Estado actual",
-    title: "Primera version lista para circular",
-    body:
-      "Esta fase usa placeholders, lorem controlado y microtextos curatoriales para validar tono, estructura y ritmo antes de conectar contenido real.",
+      "El 6 de junio de 2023 se implementa el Dia del Video Arte Boliviano, anunciado en KIOSKO Galeria. Junto a esta fecha vendran proyectos, convocatorias, catalogacion, recuperacion e implementacion de lineamientos hacia un pensamiento del video arte desde Bolivia.",
   },
 ];
 
 export const featuredArtists: ArtistProfile[] = [
-  {
-    name: "Ariana Loza",
-    role: "Instalacion sonora",
-    years: "2019 - presente",
-    focus: "escucha expandida, ruina urbana, voz encontrada",
-    bio:
-      "Lorem ipsum breve para una biografia de artista. La practica trabaja con grabaciones de campo, dispositivos analogicos y acciones de baja visibilidad.",
-  },
-  {
-    name: "Mateo Sejas",
-    role: "Video y performance",
-    years: "2017 - presente",
-    focus: "cuerpo, repeticion, montaje en vivo",
-    bio:
-      "Texto placeholder para describir una investigacion centrada en coreografias minimas, loop audiovisual y escenas de observacion prolongada.",
-  },
-  {
-    name: "Lucia Vilela",
-    role: "Archivo textil",
-    years: "2020 - presente",
-    focus: "materia, gesto manual, cartografia afectiva",
-    bio:
-      "Descripcion editorial provisional para una artista que cruza bordado, fotografia y piezas de sala con una sensibilidad documental y tactil.",
-  },
+  { name: "Pedro Octavio Pereira", role: "Video y direccion" },
+  { name: "Maria Jose Menacho", role: "Curaduria y produccion" },
+  { name: "Yinimotion", role: "Animacion y arte digital" },
+  { name: "Luciana Dalman", role: "Performance y fotografia" },
+  { name: "Franco Ali Pozo", role: "Sonido y montaje" },
 ];
 
 export const featuredArchive: ArtworkEntry[] = [
   {
-    title: "Ensayo para una vibracion opaca",
+    title: "Frecuencias del umbral",
     year: "2025",
-    format: "Instalacion multimedia",
-    dimensions: "variable",
+    format: "Video instalacion multicanal",
+    dimensions: "12 min loop",
     summary:
-      "Secuencia de luces bajas, objetos resonantes y texto suspensivo. Placeholder para una ficha de obra que prioriza tono antes que completitud.",
-    note: "Registro pendiente / imagen de sala placeholder",
+      "Tres pantallas dialogan en un espacio oscuro: cada una emite una frecuencia distinta de imagen-ruido.",
+    note: "Exhibicion pendiente",
   },
   {
-    title: "Manual para desordenar una sala",
+    title: "Cartografia de un cuerpo ausente",
     year: "2024",
-    format: "Performance y video",
-    dimensions: "24 min",
+    format: "Video performance",
+    dimensions: "8 min",
     summary:
-      "Pieza de duracion corta construida sobre repeticion, desvio coreografico y una relacion inestable entre texto, respiracion y objeto.",
-    note: "Edicion de archivo en proceso / sin credito final",
+      "Un cuerpo recorre La Paz de noche trazando un mapa invisible con gestos minimos.",
+    note: "Seleccion festivales 2025",
   },
   {
     title: "Atlas minimo del margen",
     year: "2023",
-    format: "Serie fotografica",
-    dimensions: "12 impresiones",
+    format: "Serie de video-miniatura",
+    dimensions: "5 piezas · 90s c/u",
     summary:
-      "Conjunto de imagenes y notas que se lee como diario visual. Sirve aqui como contenido semilla para validar ritmo editorial y estructura.",
-    note: "Fondo de archivo provisional / texto lorem ajustado",
+      "Cinco videos breves que funcionan como entradas de un diario visual.",
+    note: "Archivo en expansion",
   },
 ];
 
 export const events: EventEntry[] = [
   {
-    title: "Sesion abierta: Escuchar el borde",
+    title: "Taller de Video Arte: Otro modo de ver",
     excerpt:
-      "Encuentro nocturno con escucha guiada, visuales tenues y conversacion posterior. Programacion placeholder para validar agenda futura.",
-    startDate: "2026-05-08",
-    endDate: "2026-05-08",
-    venue: "Sala Nave",
-    city: "La Paz",
-    country: "Bolivia",
-    format: "Presencial",
-    statusHint: "Aforo reducido / registro previo",
-  },
-  {
-    title: "Mesa de lectura para una imagen cansada",
-    excerpt:
-      "Conversatorio con invitados, apuntes de trabajo y una muestra de materiales en proceso. Copy provisional con tono editorial.",
-    startDate: "2026-06-14",
-    endDate: "2026-06-14",
-    venue: "Patio Norte",
-    city: "Cochabamba",
-    country: "Bolivia",
-    format: "Hibrido",
-    statusHint: "Transmision parcial / materiales descargables",
-  },
-  {
-    title: "Archivo de luces lentas",
-    excerpt:
-      "Exhibicion de piezas audiovisuales, notas murales y mediacion publica. Placeholder para un bloque de evento expandido.",
-    startDate: "2026-07-22",
-    endDate: "2026-08-02",
-    venue: "Casa de Ensayo",
+      "Taller impartido por Ivan Caceres en KIOSKO Galeria. Dirigido a estudiantes y personas que inician su vinculacion con el arte. Cuatro sesiones intensivas de video creacion, edicion basica y desarrollo de obra, con sesiones individualizadas durante tres semanas adicionales.",
+    startDate: "2023-02-28",
+    endDate: "2023-03-03",
+    venue: "KIOSKO Galeria",
     city: "Santa Cruz",
     country: "Bolivia",
-    format: "Exhibicion",
-    statusHint: "Programa de visitas y recorrido comentado",
+    format: "Taller presencial",
+    statusHint: "Concluido · origen del colectivo",
   },
   {
-    title: "Residuo, gesto, repeticion",
+    title: "Anuncio: Dia del Video Arte Boliviano",
     excerpt:
-      "Programa pasado que hoy alimenta el archivo: textos, registros de sala y memoria de montaje como capas navegables.",
-    startDate: "2025-11-16",
-    endDate: "2025-11-20",
-    venue: "Estudio Sur",
+      "El 6 de junio de 2023 se anuncio en KIOSKO Galeria la implementacion del Dia del Video Arte Boliviano, como parte de la iniciativa que daria origen al colectivo. Un hito fundacional para la practica del video arte en Bolivia.",
+    startDate: "2023-06-06",
+    endDate: "2023-06-06",
+    venue: "KIOSKO Galeria",
+    city: "Santa Cruz",
+    country: "Bolivia",
+    format: "Anuncio publico",
+    statusHint: "Hito fundacional",
+  },
+  {
+    title: "Proyeccion: Constelaciones minimas",
+    excerpt:
+      "Primera muestra colectiva de video arte con piezas breves de los miembros fundadores. Proyeccion en loop acompanada de una conversacion abierta sobre los procesos de cada obra.",
+    startDate: "2024-09-14",
+    endDate: "2024-09-14",
+    venue: "Espacio Cultural Bunker",
     city: "La Paz",
     country: "Bolivia",
-    format: "Laboratorio",
-    statusHint: "Documentacion completa / descarga pendiente",
+    format: "Proyeccion y conversatorio",
+    statusHint: "Documentacion parcial",
   },
   {
-    title: "Tres formas de sostener una imagen",
+    title: "Laboratorio: Imagen, materia, silencio",
     excerpt:
-      "Ciclo de visionado y conversacion. Esta entrada funciona como placeholder de archivo para eventos ya concluidos.",
-    startDate: "2025-08-09",
-    endDate: "2025-08-09",
-    venue: "Archivo Vacio",
-    city: "Sucre",
+      "Encuentro de experimentacion de tres dias enfocado en la relacion entre video, objeto y espacio. Los participantes intervinieron una sala vacia con proyecciones y grabaciones de campo en tiempo real.",
+    startDate: "2025-05-08",
+    endDate: "2025-05-10",
+    venue: "Taller 22",
+    city: "Cochabamba",
     country: "Bolivia",
-    format: "Conversatorio",
-    statusHint: "Registro sonoro y notas de sala disponibles",
-  },
-  {
-    title: "Protocolo para una escena quieta",
-    excerpt:
-      "Sesion de performance, ensayo abierto y activacion publica. Texto provisional con tono descriptivo y sin datos finales.",
-    startDate: "2024-10-04",
-    endDate: "2024-10-06",
-    venue: "Patio Central",
-    city: "La Paz",
-    country: "Bolivia",
-    format: "Presencial",
-    statusHint: "Archivo fotografico en revision",
+    format: "Laboratorio intensivo",
+    statusHint: "Memoria en edicion",
   },
 ];
 
@@ -234,5 +182,5 @@ export function formatEventRange(startDate: string, endDate: string) {
     return eventFormatter.format(start);
   }
 
-  return `${eventFormatter.format(start)} - ${eventFormatter.format(end)}`;
+  return `${eventFormatter.format(start)} — ${eventFormatter.format(end)}`;
 }
