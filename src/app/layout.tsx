@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Epilogue, Source_Sans_3 } from "next/font/google";
+import { Epilogue } from "next/font/google";
 import { ScrollTriggerRefresh } from "@/components/gsap/scroll-trigger-refresh";
 import "./globals.css";
 
@@ -7,12 +7,6 @@ const display = Epilogue({
   variable: "--font-display-face",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-});
-
-const sans = Source_Sans_3({
-  variable: "--font-sans-face",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -32,8 +26,14 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${display.variable} ${sans.variable} h-full antialiased`}
+      className={`${display.variable} h-full antialiased`}
     >
+      <head>
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <ScrollTriggerRefresh />
         {children}

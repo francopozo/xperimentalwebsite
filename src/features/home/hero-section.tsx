@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { TextReveal } from "@/components/gsap/text-reveal";
 import { navigation } from "@/lib/site-content";
 
 gsap.registerPlugin(useGSAP);
@@ -21,8 +22,6 @@ export function HeroSection() {
       const navLinks = gsap.utils.toArray<HTMLElement>(
         scope.querySelectorAll(".hero-nav"),
       );
-      const title = scope.querySelector(".hero-title");
-      const subtitle = scope.querySelector(".hero-subtitle");
       const image = scope.querySelector(".hero-image");
 
       const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
@@ -34,22 +33,6 @@ export function HeroSection() {
           duration: 0.8,
           stagger: 0.08,
         }, 0);
-      }
-
-      if (title) {
-        tl.from(title, {
-          y: 48,
-          opacity: 0,
-          duration: 1.2,
-        }, 0.15);
-      }
-
-      if (subtitle) {
-        tl.from(subtitle, {
-          y: 28,
-          opacity: 0,
-          duration: 1,
-        }, 0.35);
       }
 
       if (image) {
@@ -69,9 +52,9 @@ export function HeroSection() {
       id="inicio"
       className="relative min-h-screen px-6 py-20 sm:px-10 lg:px-20"
     >
-      <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-[90rem] items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="space-y-8">
-          <header className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm uppercase tracking-[0.18em] text-foreground/55">
+      <div className="mx-auto grid min-h-[calc(100vh-6rem)] max-w-[90rem] items-center gap-12 lg:grid-cols-[1fr_1fr]">
+        <div className="space-y-8 lg:pr-8">
+          <header className="nav-text flex flex-wrap items-center gap-x-6 gap-y-2">
             {navigation.map((item) => (
               <a
                 key={item.href}
@@ -84,29 +67,33 @@ export function HeroSection() {
           </header>
 
           <div className="space-y-5">
-            <h1 className="hero-title font-display text-[clamp(4.2rem,10vw,9rem)] leading-[0.84] tracking-[-0.06em]">
-              X-PERIMENTAL
-            </h1>
-            <p className="hero-subtitle reading-measure text-lg leading-8 text-foreground/60">
-              Colectivo de video arte contemporaneo boliviano. Primer colectivo
-              boliviano de video arte. Plataforma para exhibir, guardar y
-              activar procesos desde la imagen en movimiento, el sonido y la
-              curaduria situada.
-            </p>
-          </div>
+            <TextReveal scrollTrigger={false} stagger={0.05} y={56} duration={1.2}>
+              <h1 className="display-hero">
+                X-PERIMENTAL
+              </h1>
+            </TextReveal>
 
+            <TextReveal scrollTrigger={false} stagger={0.08} duration={0.9} delay={0.3}>
+              <span className="block editorial-body">
+                Primer colectivo boliviano de video arte contemporaneo.
+              </span>
+              <span className="block editorial-body">
+                Plataforma para exhibir, guardar y activar procesos desde la
+                imagen en movimiento, el sonido y la curaduria situada.
+              </span>
+            </TextReveal>
+          </div>
         </div>
 
-        <div className="hero-image relative aspect-[3/4] overflow-hidden">
+        <div className="hero-image relative aspect-[3/4] overflow-hidden lg:ml-4">
           <Image
             src={heroImage}
             alt="X-PERIMENTAL — Colectivo de video arte"
             fill
-            sizes="(min-width: 1024px) 40vw, 90vw"
+            sizes="(min-width: 1024px) 45vw, 90vw"
             className="object-cover"
             priority
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
         </div>
       </div>
     </section>

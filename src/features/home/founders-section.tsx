@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ScrollReveal } from "@/components/gsap/scroll-reveal";
+import { TextReveal } from "@/components/gsap/text-reveal";
 import { Marquee } from "@/components/gsap/marquee";
 import { featuredArtists } from "@/lib/site-content";
 
@@ -8,7 +8,7 @@ const founderImages = [
   "/images/image6.jpg",
   "/images/image7.jpg",
   "/images/image8.jpg",
-  "/images/image9.jpg",
+  "/images/image10.jpg",
 ];
 
 export function FoundersSection() {
@@ -18,14 +18,14 @@ export function FoundersSection() {
         className="relative px-6 py-20 sm:px-10 lg:px-20 lg:py-28"
     >
       <div className="mx-auto max-w-[90rem] space-y-10">
-        <ScrollReveal>
-          <div className="space-y-2">
-            <h2 className="font-display text-[clamp(2.4rem,5vw,4.8rem)] leading-[0.92] tracking-[-0.05em]">
-              Artistas y lineas
-              <span className="block">de exploracion.</span>
-            </h2>
-          </div>
-        </ScrollReveal>
+        <TextReveal>
+          <h2 className="display-title">
+            Artistas y lineas
+          </h2>
+          <h2 className="display-title">
+            de exploracion.
+          </h2>
+        </TextReveal>
 
         <Marquee speed={22}>
           {featuredArtists.map((artist, index) => (
