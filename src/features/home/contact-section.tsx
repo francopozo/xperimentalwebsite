@@ -1,6 +1,11 @@
 import { TextReveal } from "@/components/gsap/text-reveal";
+import type { HomeSiteSettings } from "@/lib/home-content";
 
-export function ContactSection() {
+type ContactSectionProps = {
+  siteSettings: HomeSiteSettings;
+};
+
+export function ContactSection({ siteSettings }: ContactSectionProps) {
   return (
     <section
       id="contacto"
@@ -15,37 +20,23 @@ export function ContactSection() {
 
         <TextReveal delay={0.15} stagger={0.12}>
           <span className="block editorial-body">
-            x.perimental.colectivo@gmail.com
+            {siteSettings.contactEmail}
           </span>
           <div className="flex flex-wrap gap-6">
-            <a
-              href="https://www.instagram.com/x.perimental.colectivo"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="nav-link inline-flex items-center gap-2 editorial-body"
-            >
-              Instagram <span aria-hidden="true">↗</span>
-            </a>
-            <a
-              href="https://www.facebook.com/profile.php?id=100093236080840"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="nav-link inline-flex items-center gap-2 editorial-body"
-            >
-              Facebook <span aria-hidden="true">↗</span>
-            </a>
-            <a
-              href="https://www.youtube.com/@xperimental_c"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="nav-link inline-flex items-center gap-2 editorial-body"
-            >
-              YouTube <span aria-hidden="true">↗</span>
-            </a>
+            {siteSettings.socialLinks.map((link) => (
+              <a
+                key={link._key}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nav-link inline-flex items-center gap-2 editorial-body"
+              >
+                {link.label} <span aria-hidden="true">↗</span>
+              </a>
+            ))}
           </div>
           <span className="block body-large mt-8">
-            Abierto a colaboraciones, propuestas de exhibicion y todo proyecto
-            que expanda el pensamiento del video arte desde Bolivia.
+            {siteSettings.collaborationText}
           </span>
         </TextReveal>
       </div>

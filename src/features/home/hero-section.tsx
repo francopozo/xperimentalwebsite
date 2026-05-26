@@ -5,13 +5,23 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { TextReveal } from "@/components/gsap/text-reveal";
-import { navigation } from "@/lib/site-content";
+import type { NavItem } from "@/lib/site-content";
 
 gsap.registerPlugin(useGSAP);
 
 const heroImage = "/images/image1.jpg";
 
-export function HeroSection() {
+type HeroSectionProps = {
+  navigationItems: NavItem[];
+  siteTitle: string;
+  siteDescription: string;
+};
+
+export function HeroSection({
+  navigationItems,
+  siteTitle,
+  siteDescription,
+}: HeroSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -55,7 +65,7 @@ export function HeroSection() {
       <div className="mx-auto grid min-h-[calc(100vh-6rem)] max-w-[90rem] items-center gap-12 lg:grid-cols-[1fr_1fr]">
         <div className="space-y-8 lg:pr-8">
           <header className="nav-text flex flex-wrap items-center gap-x-6 gap-y-2">
-            {navigation.map((item) => (
+            {navigationItems.map((item) => (
               <a
                 key={item.href}
                 className="nav-link hero-nav"
@@ -69,17 +79,13 @@ export function HeroSection() {
           <div className="space-y-5">
             <TextReveal scrollTrigger={false} stagger={0.05} y={56} duration={1.2}>
               <h1 className="display-hero">
-                X-PERIMENTAL
+                {siteTitle}
               </h1>
             </TextReveal>
 
             <TextReveal scrollTrigger={false} stagger={0.08} duration={0.9} delay={0.3}>
               <span className="block editorial-body">
-                Primer colectivo boliviano de video arte contemporaneo.
-              </span>
-              <span className="block editorial-body">
-                Plataforma para exhibir, guardar y activar procesos desde la
-                imagen en movimiento, el sonido y la curaduria situada.
+                {siteDescription}
               </span>
             </TextReveal>
           </div>

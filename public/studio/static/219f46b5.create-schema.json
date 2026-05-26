@@ -1,0 +1,737 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Nombre"
+      },
+      {
+        "options": {
+          "source": "name",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "role",
+        "type": "string",
+        "title": "Rol o linea de exploracion"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 260
+              }
+            ]
+          }
+        ],
+        "name": "shortBio",
+        "type": "text",
+        "title": "Bio corta"
+      },
+      {
+        "rows": 8,
+        "name": "longBio",
+        "type": "text",
+        "title": "Bio larga"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "portrait",
+        "type": "imageWithAlt",
+        "title": "Retrato"
+      },
+      {
+        "of": [
+          {
+            "type": "socialLink",
+            "title": "Enlace social"
+          }
+        ],
+        "name": "links",
+        "type": "array",
+        "title": "Enlaces"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ]
+          }
+        ],
+        "description": "Usa valores bajos para mostrar primero en la home.",
+        "name": "featuredOrder",
+        "type": "number",
+        "title": "Orden destacado"
+      }
+    ],
+    "name": "artist",
+    "type": "document",
+    "title": "Artistas"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Titulo"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 320
+              }
+            ]
+          }
+        ],
+        "name": "excerpt",
+        "type": "text",
+        "title": "Extracto"
+      },
+      {
+        "rows": 10,
+        "name": "description",
+        "type": "text",
+        "title": "Descripcion"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "startDate",
+        "type": "date",
+        "title": "Fecha de inicio"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "custom"
+              }
+            ]
+          }
+        ],
+        "name": "endDate",
+        "type": "date",
+        "title": "Fecha de cierre"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "venue",
+        "type": "string",
+        "title": "Sede"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "city",
+        "type": "string",
+        "title": "Ciudad"
+      },
+      {
+        "initialValue": "Bolivia",
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "country",
+        "type": "string",
+        "title": "Pais"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "format",
+        "type": "string",
+        "title": "Formato"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 80
+              }
+            ]
+          }
+        ],
+        "description": "Texto corto para la home o archivo, por ejemplo: Hito fundacional.",
+        "name": "statusHint",
+        "type": "string",
+        "title": "Estado editorial"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "coverImage",
+        "type": "imageWithAlt",
+        "title": "Imagen portada"
+      },
+      {
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "imageWithAlt",
+            "title": "Imagen"
+          }
+        ],
+        "name": "gallery",
+        "type": "array",
+        "title": "Galeria"
+      }
+    ],
+    "name": "event",
+    "type": "document",
+    "title": "Eventos"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Titulo"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "year",
+        "type": "string",
+        "title": "Anio"
+      },
+      {
+        "name": "duration",
+        "type": "string",
+        "title": "Duracion"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "medium",
+        "type": "string",
+        "title": "Formato o medio"
+      },
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 320
+              }
+            ]
+          }
+        ],
+        "name": "summary",
+        "type": "text",
+        "title": "Resumen"
+      },
+      {
+        "rows": 8,
+        "name": "technicalSheet",
+        "type": "text",
+        "title": "Ficha tecnica"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "embedUrl",
+        "type": "url",
+        "title": "URL de video embebido"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "coverImage",
+        "type": "imageWithAlt",
+        "title": "Imagen portada"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "artist"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to artistas"
+          }
+        ],
+        "name": "relatedArtists",
+        "type": "array",
+        "title": "Artistas relacionados"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "event"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to eventos"
+          }
+        ],
+        "name": "relatedEvents",
+        "type": "array",
+        "title": "Eventos relacionados"
+      }
+    ],
+    "name": "videoWork",
+    "type": "document",
+    "title": "Videoarte"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "siteTitle",
+        "type": "string",
+        "title": "Titulo del sitio"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "siteDescription",
+        "type": "text",
+        "title": "Descripcion del sitio"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "contactEmail",
+        "type": "string",
+        "title": "Email de contacto"
+      },
+      {
+        "rows": 4,
+        "name": "collaborationText",
+        "type": "text",
+        "title": "Texto de colaboracion"
+      },
+      {
+        "of": [
+          {
+            "type": "socialLink",
+            "title": "Enlace social"
+          }
+        ],
+        "name": "socialLinks",
+        "type": "array",
+        "title": "Redes sociales"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "artist"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to artistas"
+          }
+        ],
+        "name": "featuredArtists",
+        "type": "array",
+        "title": "Artistas destacados"
+      },
+      {
+        "to": [
+          {
+            "type": "event"
+          }
+        ],
+        "name": "featuredEvent",
+        "type": "reference",
+        "title": "Evento destacado"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "type": "videoWork"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to videoarte"
+          }
+        ],
+        "name": "featuredVideos",
+        "type": "array",
+        "title": "Videos destacados"
+      }
+    ],
+    "name": "siteSettings",
+    "type": "document",
+    "title": "Configuracion del sitio"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "platform",
+        "type": "string",
+        "title": "Plataforma"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "label",
+        "type": "string",
+        "title": "Etiqueta visible"
+      },
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "url",
+        "type": "url",
+        "title": "URL"
+      }
+    ],
+    "name": "socialLink",
+    "type": "object",
+    "title": "Enlace social"
+  },
+  {
+    "options": {
+      "hotspot": true
+    },
+    "fields": [
+      {
+        "validation": [
+          {
+            "level": "error",
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ]
+          }
+        ],
+        "name": "alt",
+        "type": "string",
+        "title": "Texto alternativo"
+      }
+    ],
+    "name": "imageWithAlt",
+    "type": "image",
+    "title": "Imagen"
+  }
+]

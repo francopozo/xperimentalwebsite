@@ -46,6 +46,7 @@ export const navigation: NavItem[] = [
   { href: "#sobre", label: "Sobre" },
   { href: "#origen", label: "Origen" },
   { href: "#artistas", label: "Artistas" },
+  { href: "#videoarte", label: "Videoarte" },
   { href: "#eventos", label: "Eventos" },
   { href: "#contacto", label: "Contacto" },
 ];
