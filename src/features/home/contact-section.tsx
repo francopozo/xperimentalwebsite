@@ -19,9 +19,12 @@ export function ContactSection({ siteSettings }: ContactSectionProps) {
         </TextReveal>
 
         <TextReveal delay={0.15} stagger={0.12}>
-          <span className="block editorial-body">
+          <a
+            href={`mailto:${siteSettings.contactEmail}`}
+            className="block editorial-body"
+          >
             {siteSettings.contactEmail}
-          </span>
+          </a>
           <div className="flex flex-wrap gap-6">
             {siteSettings.socialLinks.map((link) => (
               <a
@@ -42,8 +45,10 @@ export function ContactSection({ siteSettings }: ContactSectionProps) {
       </div>
 
       <footer className="mx-auto mt-20 max-w-[90rem] pt-6">
-        <div className="flex flex-row justify-between">
-          <span className="footer-meta">© 2026 Colectivo Xperimental · Bolivia</span>
+        <div className="flex flex-row justify-between gap-4">
+          <span className="footer-meta">
+            © 2026 {siteSettings.siteTitle} · Bolivia
+          </span>
           <span className="footer-meta">Desarrollado por francofx</span>
         </div>
       </footer>

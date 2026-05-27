@@ -1,20 +1,29 @@
 import Image from "next/image";
 import { TextReveal } from "@/components/gsap/text-reveal";
 import { SanityImage } from "@/components/media/sanity-image";
-import type { HomeEvent } from "@/lib/home-content";
+import type { HomeEvent, HomeSiteSettings } from "@/lib/home-content";
 import { formatEventRange } from "@/lib/site-content";
 
 const eventsImage = "/images/image4.jpg";
 
 type EventsSectionProps = {
   events: HomeEvent[];
+  heroImage?: HomeSiteSettings["eventsHeroImage"];
 };
 
-export function EventsSection({ events }: EventsSectionProps) {
+export function EventsSection({ events, heroImage }: EventsSectionProps) {
   return (
     <>
       <div className="relative h-[40vh] w-full overflow-hidden">
-        {events[0]?.coverImage?.asset?.url ? (
+        {heroImage?.asset?.url ? (
+          <SanityImage
+            value={heroImage}
+            alt="Imagen principal de la seccion Eventos"
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+        ) : events[0]?.coverImage?.asset?.url ? (
           <SanityImage
             value={events[0].coverImage}
             alt={events[0].title}

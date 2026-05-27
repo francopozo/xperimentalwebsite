@@ -5,22 +5,26 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { TextReveal } from "@/components/gsap/text-reveal";
+import { SanityImage } from "@/components/media/sanity-image";
+import type { HomeSiteSettings } from "@/lib/home-content";
 import type { NavItem } from "@/lib/site-content";
 
 gsap.registerPlugin(useGSAP);
 
-const heroImage = "/images/image1.jpg";
+const heroImagePath = "/images/image1.jpg";
 
 type HeroSectionProps = {
   navigationItems: NavItem[];
   siteTitle: string;
   siteDescription: string;
+  heroImage?: HomeSiteSettings["heroImage"];
 };
 
 export function HeroSection({
   navigationItems,
   siteTitle,
   siteDescription,
+  heroImage,
 }: HeroSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -92,14 +96,24 @@ export function HeroSection({
         </div>
 
         <div className="hero-image relative aspect-[3/4] overflow-hidden lg:ml-4">
-          <Image
-            src={heroImage}
-            alt="X-PERIMENTAL — Colectivo de video arte"
-            fill
-            sizes="(min-width: 1024px) 45vw, 90vw"
-            className="object-cover"
-            priority
-          />
+          {heroImage?.asset?.url ? (
+            <SanityImage
+              value={heroImage}
+              alt={`${siteTitle} — Colectivo de video arte`}
+              sizes="(min-width: 1024px) 45vw, 90vw"
+              className="object-cover"
+              priority
+            />
+          ) : (
+            <Image
+              src={heroImagePath}
+              alt={`${siteTitle} — Colectivo de video arte`}
+              fill
+              sizes="(min-width: 1024px) 45vw, 90vw"
+              className="object-cover"
+              priority
+            />
+          )}
         </div>
       </div>
     </section>

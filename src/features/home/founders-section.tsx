@@ -32,7 +32,7 @@ export function FoundersSection({ artists }: FoundersSectionProps) {
           </h2>
         </TextReveal>
 
-        <Marquee speed={22}>
+        <Marquee speed={32}>
           {artists.map((artist, index) => (
             <div
               key={artist.name}
@@ -59,9 +59,6 @@ export function FoundersSection({ artists }: FoundersSectionProps) {
               <div>
                 <p className="font-display text-[1.15rem] leading-[1.05] tracking-[-0.03em]">
                   {artist.name}
-                </p>
-                <p className="mt-1 text-sm uppercase tracking-[0.14em] text-foreground/45">
-                  {artist.role}
                 </p>
                 {artist.shortBio ? (
                   <p className="mt-2 text-[0.98rem] leading-6 text-foreground/70">

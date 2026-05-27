@@ -14,7 +14,7 @@ Un sitio web para un colectivo de arte situado en La Paz, Bolivia. La identidad 
 
 ## Cómo está construido
 
-Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4. Los datos hoy son estáticos con tipos TypeScript; más adelante se conectará Sanity como CMS headless. El despliegue está pensado para Vercel.
+Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4. El sitio consume contenido desde Sanity como CMS headless, con fallback local para casos de error o contenido incompleto. El despliegue está pensado para Vercel.
 
 ---
 
@@ -29,7 +29,7 @@ Una home desplegada como single-page con seis secciones:
 - **Eventos** — agenda que separa automáticamente próximos de pasados, con fechas, sede y estado.
 - **Contacto** — email y espacio para notas de proceso.
 
-Los datos y tipos viven en `src/lib/site-content.ts`. Las imágenes son placeholders genéricos en `public/images/`. Los estilos están en `src/app/globals.css` con tokens CSS, clases utilitarias editoriales y animaciones de entrada.
+Los datos editoriales principales se resuelven desde Sanity en `src/sanity/lib/queries.ts` y `src/lib/home-content.ts`, con fallback local en `src/lib/site-content.ts` para mantener la home operativa si el CMS falla. Las imágenes base viven en `public/images/`. Los estilos están en `src/app/globals.css` con tokens CSS, clases utilitarias editoriales y animaciones de entrada.
 
 ---
 
@@ -40,9 +40,9 @@ La base visual ya está sólida. Lo que sigue:
 1. **Rutas dedicadas** — páginas individuales para cada artista, obra y evento (`/artistas/[slug]`, `/archivo/[slug]`, `/eventos/[slug]`).
 2. **Componentes compartidos** — extraer ArtistCard, EventCard, ArchiveIndex, SectionHeading y demás piezas reutilizables a `src/components/`.
 3. **Módulos por dominio** — poblar `src/features/` con home, collective, artists, archive, events, contact.
-4. **Integración con CMS** — conectar Sanity usando los schemas definidos en `docs/content-model.md` y `sanity/schema/`.
+4. **Integración con CMS** — ampliar schemas y queries de Sanity conforme crezca el archivo editorial.
 5. **Animaciones avanzadas** — sumar GSAP, Motion y Lenis para scroll narrativo, reveal de texto por líneas, parallax suave y transiciones de página.
-6. **Contenido real** — reemplazar placeholders y datos semilla con material fotográfico, biografías completas y textos definitivos del colectivo.
+6. **Contenido real** — seguir poblando el CMS con material fotográfico, biografías completas y textos definitivos del colectivo.
 
 ---
 
@@ -53,6 +53,6 @@ npm install
 npm run dev
 ```
 
-Abre `http://localhost:3000`. La home actual está en `src/app/page.tsx`, los estilos en `src/app/globals.css`, los datos en `src/lib/site-content.ts`.
+Abre `http://localhost:3000`. La home actual está en `src/app/page.tsx`, los estilos en `src/app/globals.css`, y la capa editorial en `src/lib/home-content.ts` y `src/sanity/`.
 
 Documentación de referencia en `docs/`.

@@ -58,7 +58,6 @@ const videoCardFields = /* groq */ `
   year,
   duration,
   medium,
-  summary,
   technicalSheet,
   embedUrl,
   "slug": slug.current,
@@ -68,6 +67,7 @@ const videoCardFields = /* groq */ `
   relatedArtists[]->{
     _id,
     name,
+    role,
     "slug": slug.current
   },
   relatedEvents[]->{
@@ -84,6 +84,21 @@ export const SITE_SETTINGS_QUERY = defineQuery(/* groq */ `
     siteDescription,
     contactEmail,
     collaborationText,
+    heroImage{
+      ${imageFields}
+    },
+    aboutLeadImage{
+      ${imageFields}
+    },
+    aboutMeaningImage{
+      ${imageFields}
+    },
+    originImage{
+      ${imageFields}
+    },
+    eventsHeroImage{
+      ${imageFields}
+    },
     socialLinks[]{
       ${socialLinkFields}
     },

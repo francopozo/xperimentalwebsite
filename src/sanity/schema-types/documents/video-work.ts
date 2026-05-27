@@ -41,13 +41,6 @@ export const videoWorkType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "summary",
-      title: "Resumen",
-      type: "text",
-      rows: 4,
-      validation: (rule) => rule.required().max(320),
-    }),
-    defineField({
       name: "technicalSheet",
       title: "Ficha tecnica",
       type: "text",

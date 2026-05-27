@@ -18,12 +18,19 @@ export default async function Home() {
         navigationItems={homeContent.navigation}
         siteTitle={homeContent.siteSettings.siteTitle}
         siteDescription={homeContent.siteSettings.siteDescription}
+        heroImage={homeContent.siteSettings.heroImage}
       />
-      <AboutSection />
-      <OriginSection />
+      <AboutSection
+        aboutLeadImage={homeContent.siteSettings.aboutLeadImage}
+        aboutMeaningImage={homeContent.siteSettings.aboutMeaningImage}
+      />
+      <OriginSection originImageAsset={homeContent.siteSettings.originImage} />
       <FoundersSection artists={homeContent.featuredArtists} />
       <VideoArtSection videos={homeContent.videos} />
-      <EventsSection events={homeContent.events} />
+      <EventsSection
+        events={homeContent.events}
+        heroImage={homeContent.siteSettings.eventsHeroImage}
+      />
       <ContactSection siteSettings={homeContent.siteSettings} />
     </main>
   );

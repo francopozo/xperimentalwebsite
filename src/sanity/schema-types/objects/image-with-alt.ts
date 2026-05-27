@@ -1,5 +1,5 @@
 import { ImageIcon } from "@sanity/icons";
-import { defineField, defineType } from "sanity";
+import { defineType } from "sanity";
 
 export const imageWithAltType = defineType({
   name: "imageWithAlt",
@@ -9,12 +9,4 @@ export const imageWithAltType = defineType({
   options: {
     hotspot: true,
   },
-  fields: [
-    defineField({
-      name: "alt",
-      title: "Texto alternativo",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-  ],
 });

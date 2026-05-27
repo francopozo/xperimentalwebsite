@@ -1,20 +1,39 @@
 import Image from "next/image";
 import { TextReveal } from "@/components/gsap/text-reveal";
+import { SanityImage } from "@/components/media/sanity-image";
+import type { HomeSiteSettings } from "@/lib/home-content";
 
 const aboutImage = "/images/image2.jpg";
 const meaningImage = "/images/image3.jpg";
 
-export function AboutSection() {
+type AboutSectionProps = {
+  aboutLeadImage?: HomeSiteSettings["aboutLeadImage"];
+  aboutMeaningImage?: HomeSiteSettings["aboutMeaningImage"];
+};
+
+export function AboutSection({
+  aboutLeadImage,
+  aboutMeaningImage,
+}: AboutSectionProps) {
   return (
     <>
       <div className="relative h-[50vh] w-full overflow-hidden">
-        <Image
-          src={aboutImage}
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover"
-        />
+        {aboutLeadImage?.asset?.url ? (
+          <SanityImage
+            value={aboutLeadImage}
+            alt="Imagen editorial de la seccion Sobre"
+            sizes="100vw"
+            className="object-cover"
+          />
+        ) : (
+          <Image
+            src={aboutImage}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/30 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
       </div>
@@ -47,13 +66,22 @@ export function AboutSection() {
             </TextReveal>
 
             <div className="relative aspect-[4/5] overflow-hidden">
-              <Image
-                src={meaningImage}
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 35vw, 90vw"
-                className="object-cover"
-              />
+              {aboutMeaningImage?.asset?.url ? (
+                <SanityImage
+                  value={aboutMeaningImage}
+                  alt="Imagen secundaria de la seccion Sobre"
+                  sizes="(min-width: 1024px) 35vw, 90vw"
+                  className="object-cover"
+                />
+              ) : (
+                <Image
+                  src={meaningImage}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 35vw, 90vw"
+                  className="object-cover"
+                />
+              )}
             </div>
           </div>
 

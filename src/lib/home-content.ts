@@ -39,7 +39,6 @@ export type HomeVideo = {
   year: string;
   duration?: string;
   medium: string;
-  summary: string;
   technicalSheet?: string;
   embedUrl?: string;
   slug?: string;
@@ -60,6 +59,11 @@ export type HomeSiteSettings = {
   contactEmail: string;
   collaborationText: string;
   socialLinks: SocialLink[];
+  heroImage?: SanityImage;
+  aboutLeadImage?: SanityImage;
+  aboutMeaningImage?: SanityImage;
+  originImage?: SanityImage;
+  eventsHeroImage?: SanityImage;
 };
 
 export type SanityImage = {
@@ -115,7 +119,6 @@ type SanityVideo = {
   year?: string;
   duration?: string;
   medium?: string;
-  summary?: string;
   technicalSheet?: string;
   embedUrl?: string;
   slug?: string;
@@ -133,6 +136,11 @@ type SanitySettings = {
   contactEmail?: string;
   collaborationText?: string;
   socialLinks?: SocialLink[];
+  heroImage?: SanityImage;
+  aboutLeadImage?: SanityImage;
+  aboutMeaningImage?: SanityImage;
+  originImage?: SanityImage;
+  eventsHeroImage?: SanityImage;
   featuredArtists?: SanityArtist[];
   featuredVideos?: SanityVideo[];
 };
@@ -164,6 +172,11 @@ export const fallbackSiteSettings: HomeSiteSettings = {
       url: "https://www.youtube.com/@xperimental_c",
     },
   ],
+  heroImage: undefined,
+  aboutLeadImage: undefined,
+  aboutMeaningImage: undefined,
+  originImage: undefined,
+  eventsHeroImage: undefined,
 };
 
 function normalizeArtist(artist: SanityArtist): HomeArtist | null {
@@ -210,7 +223,7 @@ function normalizeEvent(event: SanityEvent): HomeEvent | null {
 }
 
 function normalizeVideo(video: SanityVideo): HomeVideo | null {
-  if (!video.title || !video.year || !video.medium || !video.summary) {
+  if (!video.title || !video.year || !video.medium) {
     return null;
   }
 
@@ -219,7 +232,6 @@ function normalizeVideo(video: SanityVideo): HomeVideo | null {
     year: video.year,
     duration: video.duration,
     medium: video.medium,
-    summary: video.summary,
     technicalSheet: video.technicalSheet,
     embedUrl: video.embedUrl,
     slug: video.slug,
@@ -244,7 +256,6 @@ function fallbackVideoSummary(video: (typeof fallbackVideos)[number]): HomeVideo
     year: video.year,
     duration: video.dimensions,
     medium: video.format,
-    summary: video.summary,
     technicalSheet: video.note,
     relatedArtists: [],
   };
@@ -323,6 +334,14 @@ export async function getHomeContent() {
         settings?.socialLinks?.length
           ? settings.socialLinks
           : fallbackSiteSettings.socialLinks,
+      heroImage: settings?.heroImage ?? fallbackSiteSettings.heroImage,
+      aboutLeadImage:
+        settings?.aboutLeadImage ?? fallbackSiteSettings.aboutLeadImage,
+      aboutMeaningImage:
+        settings?.aboutMeaningImage ?? fallbackSiteSettings.aboutMeaningImage,
+      originImage: settings?.originImage ?? fallbackSiteSettings.originImage,
+      eventsHeroImage:
+        settings?.eventsHeroImage ?? fallbackSiteSettings.eventsHeroImage,
     };
 
     return {

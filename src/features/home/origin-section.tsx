@@ -1,9 +1,15 @@
 import Image from "next/image";
 import { TextReveal } from "@/components/gsap/text-reveal";
+import { SanityImage } from "@/components/media/sanity-image";
+import type { HomeSiteSettings } from "@/lib/home-content";
 
 const originImage = "/images/image9.jpg";
 
-export function OriginSection() {
+type OriginSectionProps = {
+  originImageAsset?: HomeSiteSettings["originImage"];
+};
+
+export function OriginSection({ originImageAsset }: OriginSectionProps) {
   return (
     <section
       id="origen"
@@ -18,13 +24,22 @@ export function OriginSection() {
 
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-start">
           <div className="relative aspect-[3/4] overflow-hidden">
-            <Image
-              src={originImage}
-              alt=""
-              fill
-              sizes="(min-width: 1024px) 40vw, 90vw"
-              className="object-cover"
-            />
+            {originImageAsset?.asset?.url ? (
+              <SanityImage
+                value={originImageAsset}
+                alt="Imagen editorial de la seccion Origen"
+                sizes="(min-width: 1024px) 40vw, 90vw"
+                className="object-cover"
+              />
+            ) : (
+              <Image
+                src={originImage}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 40vw, 90vw"
+                className="object-cover"
+              />
+            )}
           </div>
 
           <div className="space-y-8">

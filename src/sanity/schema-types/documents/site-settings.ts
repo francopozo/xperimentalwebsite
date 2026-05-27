@@ -39,6 +39,31 @@ export const siteSettingsType = defineType({
       of: [defineArrayMember({ type: "socialLink" })],
     }),
     defineField({
+      name: "heroImage",
+      title: "Imagen de Inicio",
+      type: "imageWithAlt",
+    }),
+    defineField({
+      name: "aboutLeadImage",
+      title: "Imagen de Sobre",
+      type: "imageWithAlt",
+    }),
+    defineField({
+      name: "aboutMeaningImage",
+      title: "Imagen secundaria de Sobre",
+      type: "imageWithAlt",
+    }),
+    defineField({
+      name: "originImage",
+      title: "Imagen de Origen",
+      type: "imageWithAlt",
+    }),
+    defineField({
+      name: "eventsHeroImage",
+      title: "Imagen principal de Eventos",
+      type: "imageWithAlt",
+    }),
+    defineField({
       name: "featuredArtists",
       title: "Artistas destacados",
       type: "array",
