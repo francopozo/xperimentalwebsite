@@ -1,4 +1,5 @@
 import {
+  activeCurator as fallbackCurator,
   events as fallbackEvents,
   featuredArchive as fallbackVideos,
   featuredArtists as fallbackArtists,
@@ -14,20 +15,34 @@ import { sanityFetch } from "@/sanity/lib/client";
 
 export type HomeArtist = {
   name: string;
-  role: string;
+  artistType: "collectiveMember" | "artist";
+  profileLabels: ["Artista Miembro del colectivo"] | ["Artista"];
   shortBio?: string;
   slug?: string;
   portrait?: SanityImage;
 };
+
+export type HomeCurator = {
+  name: string;
+  profileLabels: ["Curador", "Artista Miembro del colectivo"];
+  shortBio?: string;
+  longBio?: string;
+  curatorNote?: string;
+  slug?: string;
+  portrait?: SanityImage;
+  links?: SocialLink[];
+};
+
+export type HomeProfile = HomeArtist | HomeCurator;
 
 export type HomeEvent = {
   title: string;
   excerpt: string;
   startDate: string;
   endDate: string;
-  venue: string;
-  city: string;
-  country: string;
+  venue?: string;
+  city?: string;
+  country?: string;
   format: string;
   statusHint: string;
   slug?: string;
@@ -43,7 +58,12 @@ export type HomeVideo = {
   embedUrl?: string;
   slug?: string;
   coverImage?: SanityImage;
-  relatedArtists: Pick<HomeArtist, "name" | "role" | "slug">[];
+  relatedArtists: Array<{
+    name: string;
+    slug?: string;
+    artistType: "collectiveMember" | "artist";
+    profileLabel: "Artista Miembro del colectivo" | "Artista";
+  }>;
 };
 
 export type SocialLink = {
@@ -67,7 +87,8 @@ export type HomeSiteSettings = {
 };
 
 export type HomeEventsWidget = {
-  events: HomeEvent[];
+  upcomingEvents: HomeEvent[];
+  pastEvents: HomeEvent[];
   hasUpcomingEvents: boolean;
 };
 
@@ -99,10 +120,20 @@ export type SanityImage = {
 
 type SanityArtist = {
   name?: string;
-  role?: string;
+  artistType?: "collectiveMember" | "artist";
   shortBio?: string;
   slug?: string;
   portrait?: SanityImage;
+};
+
+type SanityCurator = {
+  name?: string;
+  shortBio?: string;
+  longBio?: string;
+  curatorNote?: string;
+  slug?: string;
+  portrait?: SanityImage;
+  links?: SocialLink[];
 };
 
 type SanityEvent = {
@@ -130,7 +161,7 @@ type SanityVideo = {
   coverImage?: SanityImage;
   relatedArtists?: Array<{
     name?: string;
-    role?: string;
+    artistType?: "collectiveMember" | "artist";
     slug?: string;
   }>;
 };
@@ -147,6 +178,7 @@ type SanitySettings = {
   originImage?: SanityImage;
   eventsHeroImage?: SanityImage;
   featuredArtists?: SanityArtist[];
+  activeCurator?: SanityCurator;
   featuredVideos?: SanityVideo[];
 };
 
@@ -185,16 +217,37 @@ export const fallbackSiteSettings: HomeSiteSettings = {
 };
 
 function normalizeArtist(artist: SanityArtist): HomeArtist | null {
-  if (!artist.name || !artist.role) {
+  if (!artist.name || !artist.artistType) {
     return null;
   }
 
   return {
     name: artist.name,
-    role: artist.role,
+    artistType: artist.artistType,
+    profileLabels:
+      artist.artistType === "collectiveMember"
+        ? ["Artista Miembro del colectivo"]
+        : ["Artista"],
     shortBio: artist.shortBio,
     slug: artist.slug,
     portrait: artist.portrait,
+  };
+}
+
+function normalizeCurator(curator: SanityCurator): HomeCurator | null {
+  if (!curator.name) {
+    return null;
+  }
+
+  return {
+    name: curator.name,
+    profileLabels: ["Curador", "Artista Miembro del colectivo"],
+    shortBio: curator.shortBio,
+    longBio: curator.longBio,
+    curatorNote: curator.curatorNote,
+    slug: curator.slug,
+    portrait: curator.portrait,
+    links: curator.links,
   };
 }
 
@@ -204,9 +257,6 @@ function normalizeEvent(event: SanityEvent): HomeEvent | null {
     !event.excerpt ||
     !event.startDate ||
     !event.endDate ||
-    !event.venue ||
-    !event.city ||
-    !event.country ||
     !event.format
   ) {
     return null;
@@ -244,12 +294,21 @@ function normalizeVideo(video: SanityVideo): HomeVideo | null {
     relatedArtists:
       video.relatedArtists
         ?.filter(
-          (artist): artist is { name: string; role: string; slug?: string } =>
-            Boolean(artist.name && artist.role),
+          (
+            artist,
+          ): artist is {
+            name: string;
+            artistType: "collectiveMember" | "artist";
+            slug?: string;
+          } => Boolean(artist.name && artist.artistType),
         )
         .map((artist) => ({
           name: artist.name,
-          role: artist.role,
+          artistType: artist.artistType,
+          profileLabel:
+            artist.artistType === "collectiveMember"
+              ? "Artista Miembro del colectivo"
+              : "Artista",
           slug: artist.slug,
         })) ?? [],
   };
@@ -314,17 +373,10 @@ function splitHomeEventsByTimeline(
   }
 
   archivedEvents.sort((left, right) => right.startDate.localeCompare(left.startDate));
-
-  if (upcomingEvents.length > 0) {
-    return {
-      events: upcomingEvents,
-      hasUpcomingEvents: true,
-    };
-  }
-
   return {
-    events: archivedEvents,
-    hasUpcomingEvents: false,
+    upcomingEvents,
+    pastEvents: archivedEvents,
+    hasUpcomingEvents: upcomingEvents.length > 0,
   };
 }
 
@@ -350,12 +402,23 @@ export async function getHomeContent() {
         ?.map(normalizeArtist)
         .filter((artist): artist is HomeArtist => artist !== null) ?? [];
 
+    const collectiveArtists = featuredArtists.filter(
+      (artist) => artist.artistType === "collectiveMember",
+    );
+
+    const activeCurator = settings?.activeCurator
+      ? normalizeCurator(settings.activeCurator)
+      : null;
+
     const artists =
-      featuredArtists.length > 0
-        ? featuredArtists
+      collectiveArtists.length > 0
+        ? collectiveArtists
         : sanityArtists
             .map(normalizeArtist)
-            .filter((artist): artist is HomeArtist => artist !== null);
+            .filter(
+              (artist): artist is HomeArtist =>
+                artist !== null && artist.artistType === "collectiveMember",
+            );
 
     const events = sanityEvents
       .map(normalizeEvent)
@@ -398,7 +461,13 @@ export async function getHomeContent() {
 
     return {
       navigation,
-      featuredArtists: artists.length > 0 ? artists : fallbackArtists,
+      featuredProfiles:
+        activeCurator || artists.length > 0
+          ? [activeCurator, ...(artists.length > 0 ? artists : fallbackArtists)].filter(
+              (profile): profile is HomeProfile => profile !== null,
+            )
+          : [normalizeCurator(fallbackCurator), ...fallbackArtists]
+              .filter((profile): profile is HomeProfile => profile !== null),
       eventsWidget,
       videos: videos.length > 0 ? videos : fallbackVideos.map(fallbackVideoSummary),
       siteSettings,
@@ -408,7 +477,9 @@ export async function getHomeContent() {
 
     return {
       navigation,
-      featuredArtists: fallbackArtists,
+      featuredProfiles: [normalizeCurator(fallbackCurator), ...fallbackArtists].filter(
+        (profile): profile is HomeProfile => profile !== null,
+      ),
       eventsWidget: splitHomeEventsByTimeline(fallbackEvents),
       videos: fallbackVideos.map(fallbackVideoSummary),
       siteSettings: fallbackSiteSettings,

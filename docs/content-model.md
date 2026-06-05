@@ -6,7 +6,11 @@ title, slug, excerpt, description, startDate, endDate, venue, city, country, sta
 
 ## Artist
 
-name, slug, shortBio, longBio, portrait, gallery, links, featuredWorks
+name, slug, artistType, shortBio, longBio, portrait, links, featuredOrder
+
+## Curator
+
+name, slug, shortBio, longBio, curatorNote, portrait, links
 
 ## Artwork / Project
 
@@ -14,4 +18,4 @@ title, slug, year, medium, dimensions, summary, body, coverImage, gallery, relat
 
 ## Site Settings
 
-siteTitle, siteDescription, socialLinks, contactEmail, featuredEvent, featuredArtists
+siteTitle, siteDescription, socialLinks, contactEmail, featuredEvent, featuredArtists, activeCurator

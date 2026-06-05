@@ -66,14 +66,27 @@ export const siteSettingsType = defineType({
     defineField({
       name: "featuredArtists",
       title: "Artistas destacados",
+      description:
+        "Seleccion manual para artistas del colectivo que apareceran en la home.",
       type: "array",
       of: [
         defineArrayMember({
           type: "reference",
           to: [{ type: "artist" }],
+          options: {
+            filter: 'artistType == "collectiveMember"',
+          },
         }),
       ],
       validation: (rule) => rule.unique(),
+    }),
+    defineField({
+      name: "activeCurator",
+      title: "Curador activo",
+      description:
+        "Referencia al unico curador que debe mostrarse actualmente en el sitio.",
+      type: "reference",
+      to: [{ type: "curator" }],
     }),
     defineField({
       name: "featuredEvent",

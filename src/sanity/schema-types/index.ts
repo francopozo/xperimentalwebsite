@@ -1,4 +1,5 @@
 import { artistType } from "./documents/artist";
+import { curatorType } from "./documents/curator";
 import { eventType } from "./documents/event";
 import { siteSettingsType } from "./documents/site-settings";
 import { videoWorkType } from "./documents/video-work";
@@ -7,6 +8,7 @@ import { socialLinkType } from "./objects/social-link";
 
 export const schemaTypes = [
   artistType,
+  curatorType,
   eventType,
   videoWorkType,
   siteSettingsType,

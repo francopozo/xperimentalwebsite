@@ -65,20 +65,20 @@ export const eventType = defineType({
       name: "venue",
       title: "Sede",
       type: "string",
-      validation: (rule) => rule.required(),
+      description: "Opcional. Puede dejarse vacio para eventos online o sin sede fija.",
     }),
     defineField({
       name: "city",
       title: "Ciudad",
       type: "string",
-      validation: (rule) => rule.required(),
+      description: "Opcional. Util para eventos presenciales o hibridos.",
     }),
     defineField({
       name: "country",
       title: "Pais",
       type: "string",
       initialValue: "Bolivia",
-      validation: (rule) => rule.required(),
+      description: "Opcional. Puede omitirse si el evento no tiene ubicacion fisica.",
     }),
     defineField({
       name: "format",
@@ -108,13 +108,18 @@ export const eventType = defineType({
   preview: {
     select: {
       title: "title",
-      subtitle: "venue",
+      venue: "venue",
+      city: "city",
+      country: "country",
+      format: "format",
       media: "coverImage",
     },
-    prepare({ title, subtitle }) {
+    prepare({ title, venue, city, country, format }) {
+      const location = [venue, city, country].filter(Boolean).join(" · ");
+
       return {
         title,
-        subtitle,
+        subtitle: location || format || "Evento sin ubicacion fisica",
       };
     },
   },

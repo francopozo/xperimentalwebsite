@@ -25,11 +25,11 @@ export default async function Home() {
         aboutMeaningImage={homeContent.siteSettings.aboutMeaningImage}
       />
       <OriginSection originImageAsset={homeContent.siteSettings.originImage} />
-      <FoundersSection artists={homeContent.featuredArtists} />
+      <FoundersSection profiles={homeContent.featuredProfiles} />
       <VideoArtSection videos={homeContent.videos} />
       <EventsSection
-        events={homeContent.eventsWidget.events}
-        hasUpcomingEvents={homeContent.eventsWidget.hasUpcomingEvents}
+        upcomingEvents={homeContent.eventsWidget.upcomingEvents}
+        pastEvents={homeContent.eventsWidget.pastEvents}
         heroImage={homeContent.siteSettings.eventsHeroImage}
       />
       <ContactSection siteSettings={homeContent.siteSettings} />

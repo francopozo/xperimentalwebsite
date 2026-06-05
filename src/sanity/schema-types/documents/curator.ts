@@ -1,9 +1,9 @@
 import { UserIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
-export const artistType = defineType({
-  name: "artist",
-  title: "Artistas",
+export const curatorType = defineType({
+  name: "curator",
+  title: "Curador",
   type: "document",
   icon: UserIcon,
   fields: [
@@ -24,25 +24,6 @@ export const artistType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "artistType",
-      title: "Tipo de artista",
-      type: "string",
-      options: {
-        list: [
-          {
-            title: "Artista Miembro del colectivo",
-            value: "collectiveMember",
-          },
-          {
-            title: "Artista",
-            value: "artist",
-          },
-        ],
-        layout: "radio",
-      },
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: "shortBio",
       title: "Bio corta",
       type: "text",
@@ -56,6 +37,14 @@ export const artistType = defineType({
       rows: 8,
     }),
     defineField({
+      name: "curatorNote",
+      title: "Comentario del curador",
+      type: "text",
+      rows: 8,
+      description:
+        "Texto editorial o palabras del curador para futuras secciones especiales.",
+    }),
+    defineField({
       name: "portrait",
       title: "Retrato",
       type: "imageWithAlt",
@@ -67,29 +56,16 @@ export const artistType = defineType({
       type: "array",
       of: [defineArrayMember({ type: "socialLink" })],
     }),
-    defineField({
-      name: "featuredOrder",
-      title: "Orden destacado",
-      type: "number",
-      description: "Usa valores bajos para mostrar primero en la home.",
-      validation: (rule) => rule.integer().min(0),
-    }),
   ],
   preview: {
     select: {
       title: "name",
-      artistType: "artistType",
       media: "portrait",
     },
-    prepare({ title, artistType }) {
-      const subtitle =
-        artistType === "collectiveMember"
-          ? "Artista Miembro del colectivo"
-          : "Artista";
-
+    prepare({ title }) {
       return {
         title,
-        subtitle,
+        subtitle: "Curador",
       };
     },
   },

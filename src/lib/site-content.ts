@@ -11,7 +11,14 @@ export type EditorialNote = {
 
 export type ArtistProfile = {
   name: string;
-  role: string;
+  artistType: "collectiveMember" | "artist";
+  shortBio?: string;
+};
+
+export type CuratorProfile = {
+  name: string;
+  shortBio?: string;
+  curatorNote?: string;
 };
 
 export type ArtworkEntry = {
@@ -67,12 +74,34 @@ export const editorialNotes: EditorialNote[] = [
 ];
 
 export const featuredArtists: ArtistProfile[] = [
-  { name: "Pedro Octavio Pereira", role: "Video y direccion" },
-  { name: "Maria Jose Menacho", role: "Curaduria y produccion" },
-  { name: "Yinimotion", role: "Animacion y arte digital" },
-  { name: "Luciana Dalman", role: "Performance y fotografia" },
-  { name: "Franco Ali Pozo", role: "Sonido y montaje" },
+  {
+    name: "Pedro Octavio Pereira",
+    artistType: "collectiveMember",
+    shortBio: "Video y direccion dentro de los procesos del colectivo.",
+  },
+  {
+    name: "Yinimotion",
+    artistType: "collectiveMember",
+    shortBio: "Animacion y arte digital desde una practica experimental.",
+  },
+  {
+    name: "Luciana Dalman",
+    artistType: "collectiveMember",
+    shortBio: "Performance y fotografia en cruce con imagen en movimiento.",
+  },
+  {
+    name: "Franco Ali Pozo",
+    artistType: "collectiveMember",
+    shortBio: "Sonido y montaje para piezas audiovisuales y acciones vivas.",
+  },
 ];
+
+export const activeCurator: CuratorProfile = {
+  name: "Maria Jose Menacho",
+  shortBio: "Curaduria y produccion como parte del impulso editorial del colectivo.",
+  curatorNote:
+    "Acompana el pensamiento del video arte desde una mirada curatorial y de produccion situada.",
+};
 
 export const featuredArchive: ArtworkEntry[] = [
   {

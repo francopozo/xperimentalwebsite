@@ -27,11 +27,26 @@ const socialLinkFields = /* groq */ `
 const artistCardFields = /* groq */ `
   _id,
   name,
-  role,
+  artistType,
   shortBio,
   "slug": slug.current,
   portrait{
     ${imageFields}
+  }
+`;
+
+const curatorCardFields = /* groq */ `
+  _id,
+  name,
+  shortBio,
+  longBio,
+  curatorNote,
+  "slug": slug.current,
+  portrait{
+    ${imageFields}
+  },
+  links[]{
+    ${socialLinkFields}
   }
 `;
 
@@ -67,7 +82,7 @@ const videoCardFields = /* groq */ `
   relatedArtists[]->{
     _id,
     name,
-    role,
+    artistType,
     "slug": slug.current
   },
   relatedEvents[]->{
@@ -105,6 +120,9 @@ export const SITE_SETTINGS_QUERY = defineQuery(/* groq */ `
     featuredArtists[]->{
       ${artistCardFields}
     },
+    activeCurator->{
+      ${curatorCardFields}
+    },
     featuredEvent->{
       ${eventCardFields}
     },
@@ -115,7 +133,7 @@ export const SITE_SETTINGS_QUERY = defineQuery(/* groq */ `
 `);
 
 export const FEATURED_ARTISTS_QUERY = defineQuery(/* groq */ `
-  *[_type == "artist" && defined(slug.current)]
+  *[_type == "artist" && defined(slug.current) && defined(artistType)]
     | order(coalesce(featuredOrder, 999) asc, name asc)[0...8]{
       ${artistCardFields}
     }
@@ -157,7 +175,7 @@ export const ARTIST_BY_SLUG_QUERY = defineQuery(/* groq */ `
   *[_type == "artist" && slug.current == $slug][0]{
     _id,
     name,
-    role,
+    artistType,
     shortBio,
     longBio,
     "slug": slug.current,
@@ -181,13 +199,25 @@ export const EVENT_BY_SLUG_QUERY = defineQuery(/* groq */ `
   }
 `);
 
+export const CURATOR_SLUGS_QUERY = defineQuery(/* groq */ `
+  *[_type == "curator" && defined(slug.current)]{
+    "slug": slug.current
+  }
+`);
+
+export const CURATOR_BY_SLUG_QUERY = defineQuery(/* groq */ `
+  *[_type == "curator" && slug.current == $slug][0]{
+    ${curatorCardFields}
+  }
+`);
+
 export const VIDEO_WORK_BY_SLUG_QUERY = defineQuery(/* groq */ `
   *[_type == "videoWork" && slug.current == $slug][0]{
     ${videoCardFields},
     relatedArtists[]->{
       _id,
       name,
-      role,
+      artistType,
       "slug": slug.current
     },
     relatedEvents[]->{
