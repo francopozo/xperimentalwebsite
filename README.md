@@ -56,3 +56,17 @@ npm run dev
 Abre `http://localhost:3000`. La home actual está en `src/app/page.tsx`, los estilos en `src/app/globals.css`, y la capa editorial en `src/lib/home-content.ts` y `src/sanity/`.
 
 Documentación de referencia en `docs/`.
+
+---
+
+## Variables de entorno
+
+- `NEXT_PUBLIC_SITE_URL`: dominio público canónico del sitio, usado para `metadataBase`, canonical y previews sociales.
+
+Ejemplo:
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://tu-dominio.com
+```
+
+Esta variable debe estar disponible durante el build de Next para que las etiquetas `openGraph`, `twitter` y `canonical` salgan con la URL final correcta.

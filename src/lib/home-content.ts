@@ -66,6 +66,11 @@ export type HomeSiteSettings = {
   eventsHeroImage?: SanityImage;
 };
 
+export type HomeEventsWidget = {
+  events: HomeEvent[];
+  hasUpcomingEvents: boolean;
+};
+
 export type SanityImage = {
   alt?: string;
   asset?: {
@@ -279,6 +284,50 @@ function mergeVideos(featuredVideos: HomeVideo[], allVideos: HomeVideo[]) {
   return merged;
 }
 
+function resolveEventReferenceDate(event: Pick<HomeEvent, "startDate" | "endDate">) {
+  const referenceDate = event.endDate || event.startDate;
+
+  if (!referenceDate) {
+    return null;
+  }
+
+  return new Date(`${referenceDate}T23:59:59`);
+}
+
+function splitHomeEventsByTimeline(
+  events: HomeEvent[],
+  referenceDate = new Date(),
+): HomeEventsWidget {
+  const upcomingEvents: HomeEvent[] = [];
+  const archivedEvents: HomeEvent[] = [];
+  const reference = referenceDate.getTime();
+
+  for (const event of events) {
+    const resolvedDate = resolveEventReferenceDate(event);
+
+    if (resolvedDate && resolvedDate.getTime() >= reference) {
+      upcomingEvents.push(event);
+      continue;
+    }
+
+    archivedEvents.push(event);
+  }
+
+  archivedEvents.sort((left, right) => right.startDate.localeCompare(left.startDate));
+
+  if (upcomingEvents.length > 0) {
+    return {
+      events: upcomingEvents,
+      hasUpcomingEvents: true,
+    };
+  }
+
+  return {
+    events: archivedEvents,
+    hasUpcomingEvents: false,
+  };
+}
+
 export async function getHomeContent() {
   try {
     const [settings, sanityArtists, sanityEvents, sanityVideos] = await Promise.all([
@@ -311,6 +360,9 @@ export async function getHomeContent() {
     const events = sanityEvents
       .map(normalizeEvent)
       .filter((event): event is HomeEvent => event !== null);
+    const eventsWidget = splitHomeEventsByTimeline(
+      events.length > 0 ? events : fallbackEvents,
+    );
 
     const featuredVideos =
       settings?.featuredVideos
@@ -347,7 +399,7 @@ export async function getHomeContent() {
     return {
       navigation,
       featuredArtists: artists.length > 0 ? artists : fallbackArtists,
-      events: events.length > 0 ? events : fallbackEvents,
+      eventsWidget,
       videos: videos.length > 0 ? videos : fallbackVideos.map(fallbackVideoSummary),
       siteSettings,
     };
@@ -357,7 +409,7 @@ export async function getHomeContent() {
     return {
       navigation,
       featuredArtists: fallbackArtists,
-      events: fallbackEvents,
+      eventsWidget: splitHomeEventsByTimeline(fallbackEvents),
       videos: fallbackVideos.map(fallbackVideoSummary),
       siteSettings: fallbackSiteSettings,
     };

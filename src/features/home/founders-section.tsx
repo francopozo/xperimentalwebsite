@@ -25,10 +25,8 @@ export function FoundersSection({ artists }: FoundersSectionProps) {
       <div className="mx-auto max-w-[90rem] space-y-10">
         <TextReveal>
           <h2 className="display-title">
-            Artistas y lineas
-          </h2>
-          <h2 className="display-title">
-            de exploracion.
+            <span className="block">Artistas y lineas</span>
+            <span className="block">de exploracion.</span>
           </h2>
         </TextReveal>
 

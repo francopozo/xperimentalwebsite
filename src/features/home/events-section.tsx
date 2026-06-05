@@ -8,10 +8,19 @@ const eventsImage = "/images/image4.jpg";
 
 type EventsSectionProps = {
   events: HomeEvent[];
+  hasUpcomingEvents: boolean;
   heroImage?: HomeSiteSettings["eventsHeroImage"];
 };
 
-export function EventsSection({ events, heroImage }: EventsSectionProps) {
+export function EventsSection({
+  events,
+  hasUpcomingEvents,
+  heroImage,
+}: EventsSectionProps) {
+  const sectionTitle = hasUpcomingEvents
+    ? "Lo que viene."
+    : "Memoria de lo que fue.";
+
   return (
     <>
       <div className="relative h-[40vh] w-full overflow-hidden">
@@ -50,9 +59,7 @@ export function EventsSection({ events, heroImage }: EventsSectionProps) {
       >
         <div className="mx-auto max-w-[90rem] space-y-12">
           <TextReveal>
-            <h2 className="display-title">
-              Memoria de lo que fue.
-            </h2>
+            <h2 className="display-title">{sectionTitle}</h2>
           </TextReveal>
 
           <TextReveal className="space-y-8" stagger={0.15}>

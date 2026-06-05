@@ -28,7 +28,7 @@ export function AboutSection({
         ) : (
           <Image
             src={aboutImage}
-            alt=""
+            alt="Imagen editorial de la seccion Sobre"
             fill
             sizes="100vw"
             className="object-cover"
@@ -40,9 +40,13 @@ export function AboutSection({
 
       <section
         id="sobre"
+        aria-labelledby="about-section-title"
         className="relative px-6 py-20 sm:px-10 lg:px-20 lg:py-28"
       >
         <div className="mx-auto max-w-[90rem] space-y-20">
+          <h2 id="about-section-title" className="sr-only">
+            Sobre el colectivo
+          </h2>
           <TextReveal>
             <span className="block editorial-body">
               A partir del taller de video arte en KIOSKO Galeria nace
@@ -76,7 +80,7 @@ export function AboutSection({
               ) : (
                 <Image
                   src={meaningImage}
-                  alt=""
+                  alt="Imagen secundaria de la seccion Sobre"
                   fill
                   sizes="(min-width: 1024px) 35vw, 90vw"
                   className="object-cover"

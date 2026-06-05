@@ -28,7 +28,8 @@ export default async function Home() {
       <FoundersSection artists={homeContent.featuredArtists} />
       <VideoArtSection videos={homeContent.videos} />
       <EventsSection
-        events={homeContent.events}
+        events={homeContent.eventsWidget.events}
+        hasUpcomingEvents={homeContent.eventsWidget.hasUpcomingEvents}
         heroImage={homeContent.siteSettings.eventsHeroImage}
       />
       <ContactSection siteSettings={homeContent.siteSettings} />
